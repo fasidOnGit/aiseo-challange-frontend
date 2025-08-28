@@ -2,16 +2,16 @@
   "venueId": "simple-arena-01",
   "name": "Simple Arena",
   "map": {
-    "width": 1200,
-    "height": 800
+    "width": 1600,
+    "height": 1200
   },
   "sections": [
     {
       "id": "A",
       "label": "Lower Bowl A",
       "transform": {
-        "x": 100,
-        "y": 100,
+        "x": 150,
+        "y": 150,
         "scale": 1
       },
       "rows": [
@@ -435,8 +435,8 @@
       "id": "B",
       "label": "Lower Bowl B",
       "transform": {
-        "x": 500,
-        "y": 100,
+        "x": 650,
+        "y": 150,
         "scale": 1
       },
       "rows": [
@@ -860,8 +860,8 @@
       "id": "C",
       "label": "Upper Bowl C",
       "transform": {
-        "x": 100,
-        "y": 400,
+        "x": 150,
+        "y": 550,
         "scale": 0.9
       },
       "rows": [
@@ -1296,8 +1296,8 @@
       "id": "D",
       "label": "Upper Bowl D",
       "transform": {
-        "x": 600,
-        "y": 400,
+        "x": 650,
+        "y": 550,
         "scale": 0.9
       },
       "rows": [
@@ -1732,8 +1732,8 @@
       "id": "E",
       "label": "VIP Box E",
       "transform": {
-        "x": 900,
-        "y": 150,
+        "x": 1200,
+        "y": 200,
         "scale": 0.8
       },
       "rows": [
@@ -1955,8 +1955,8 @@
       "id": "F",
       "label": "VIP Box F",
       "transform": {
-        "x": 900,
-        "y": 400,
+        "x": 1200,
+        "y": 500,
         "scale": 0.8
       },
       "rows": [
