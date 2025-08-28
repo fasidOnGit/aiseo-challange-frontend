@@ -4,13 +4,13 @@ import {
   Paper, 
   Typography, 
   Chip, 
-  Grid, 
   Divider,
   useTheme,
   alpha,
   Button,
   Card,
-  CardContent
+  CardContent,
+  useMediaQuery
 } from '@mui/material';
 import { 
   Chair as ChairIcon,
@@ -30,6 +30,8 @@ interface VenueSeatingProps {
 
 export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeatsChange }: VenueSeatingProps) {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   const handleSeatClick = (seatId: string, sectionId: string, rowIndex: number, col: number) => {
     if (onSeatClick) {
@@ -120,118 +122,14 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
   ))).sort();
 
   return (
-    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} role="region" aria-label="Venue seating selection">
-      {/* Legend Section - Above the SVG */}
-      <Paper 
-        elevation={2} 
-        sx={{ 
-          p: 2, 
-          mb: 2, 
-          borderRadius: 2,
-          background: theme.palette.background.paper
-        }}
-        role="region"
-        aria-label="Venue legend and information"
-      >
-        <Typography variant="h6" gutterBottom sx={{ fontWeight: 600, mb: 2 }}>
-          Venue Legend
-        </Typography>
-        
-        <Grid container spacing={3}>
-          {/* Section Types */}
-          <Grid item xs={12} md={6}>
-            <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 600, mb: 1 }}>
-              Section Types
-            </Typography>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-              {priceTiers.map((tier) => {
-                const color = tier === 1 ? 'primary' : tier === 2 ? 'success' : 'secondary';
-                const label = tier === 1 ? 'Premium' : tier === 2 ? 'Standard' : 'Economy';
-                return (
-                  <Chip
-                    key={tier}
-                    label={label}
-                    color={color}
-                    variant="outlined"
-                    size="small"
-                    icon={<ChairIcon />}
-                    role="status"
-                    aria-label={`${label} section type`}
-                  />
-                );
-              })}
-            </Box>
-          </Grid>
+    <Box sx={{ 
+      height: '100%', 
+      display: 'flex', 
+      flexDirection: 'column',
+      width: '100%',
+      overflow: 'hidden'
+    }} role="region" aria-label="Venue seating selection">
 
-          {/* Seat Status */}
-          <Grid item xs={12} md={6}>
-            <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 600, mb: 1 }}>
-              Seat Status
-            </Typography>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-              <Chip
-                label="Available"
-                color="success"
-                variant="outlined"
-                size="small"
-                icon={<EventSeatIcon />}
-                role="status"
-                aria-label="Available seat status"
-              />
-              <Chip
-                label="Selected"
-                color="success"
-                size="small"
-                icon={<CheckCircleIcon />}
-                role="status"
-                aria-label="Selected seat status"
-              />
-              <Chip
-                label="Reserved"
-                color="warning"
-                size="small"
-                icon={<BlockIcon />}
-                role="status"
-                aria-label="Reserved seat status"
-              />
-              <Chip
-                label="Sold"
-                color="error"
-                size="small"
-                icon={<BlockIcon />}
-                role="status"
-                aria-label="Sold seat status"
-              />
-            </Box>
-          </Grid>
-        </Grid>
-
-        <Divider sx={{ my: 2 }} />
-        
-        {/* Venue Info */}
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={4}>
-            <Typography variant="body2" color="text.secondary">
-              Total Sections: <strong>{venue.sections.length}</strong>
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Typography variant="body2" color="text.secondary">
-              Total Seats: <strong>{totalSeats}</strong>
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Typography variant="body2" color="text.secondary">
-              Selected: <strong>{selectedSeats.size}/8</strong>
-              {selectedSeats.size >= 8 && (
-                <Typography component="span" variant="body2" color="warning.main" sx={{ ml: 1, fontWeight: 'bold' }}>
-                  (MAX)
-                </Typography>
-              )}
-            </Typography>
-          </Grid>
-        </Grid>
-      </Paper>
 
       {/* Sticky Selection Header */}
       {selectedSeats.size > 0 && (
@@ -250,16 +148,38 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
           role="region"
           aria-label="Selected seats summary"
         >
-          <Box sx={{ p: 2 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+          <Box sx={{ p: { xs: 1.5, sm: 2 } }}>
+            <Box sx={{ 
+              display: 'flex', 
+              flexDirection: { xs: 'column', sm: 'row' },
+              justifyContent: 'space-between', 
+              alignItems: { xs: 'flex-start', sm: 'center' }, 
+              mb: 2,
+              gap: { xs: 1, sm: 0 }
+            }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                <ShoppingCartIcon color="primary" sx={{ fontSize: 24 }} aria-hidden="true" />
+                <ShoppingCartIcon 
+                  color="primary" 
+                  sx={{ fontSize: { xs: 20, sm: 24 } }} 
+                  aria-hidden="true" 
+                />
                 <Box>
-                  <Typography variant="h6" fontWeight="bold" color="text.primary">
+                  <Typography 
+                    variant={isMobile ? "subtitle1" : "h6"} 
+                    fontWeight="bold" 
+                    color="text.primary"
+                    sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}
+                  >
                     Selected Seats ({selectedSeats.size}/8)
                   </Typography>
                   {selectedSeats.size >= 8 && (
-                    <Typography variant="body2" color="warning.main" sx={{ fontSize: '0.8rem' }}>
+                    <Typography 
+                      variant="body2" 
+                      color="warning.main" 
+                      sx={{ 
+                        fontSize: { xs: '0.7rem', sm: '0.8rem' }
+                      }}
+                    >
                       Maximum 8 seats allowed
                     </Typography>
                   )}
@@ -268,7 +188,7 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
               <Button
                 variant="outlined"
                 color="error"
-                size="small"
+                size={isMobile ? "small" : "medium"}
                 startIcon={<ClearIcon />}
                 onClick={() => onSelectedSeatsChange(new Set())}
                 sx={{ borderRadius: 2 }}
@@ -279,7 +199,16 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
             </Box>
 
             {/* Selected Seats Grid */}
-            <Grid container spacing={1} sx={{ mb: 2 }} role="grid" aria-label="Selected seats grid">
+            <Box sx={{ 
+              display: 'grid', 
+              gridTemplateColumns: { 
+                xs: 'repeat(2, 1fr)', 
+                sm: 'repeat(3, 1fr)', 
+                md: 'repeat(4, 1fr)' 
+              },
+              gap: { xs: 1, sm: 1.5 }, 
+              mb: 2 
+            }} role="grid" aria-label="Selected seats grid">
               {Array.from(selectedSeats).slice(0, 8).map((seatId) => {
                 const seat = venue.sections
                   .flatMap(s => s.rows)
@@ -296,11 +225,11 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
                 );
                 
                 return (
-                  <Grid item xs={6} sm={4} md={3} key={seatId} role="gridcell">
+                  <Box key={seatId} role="gridcell">
                     <Card 
                       elevation={1}
                       sx={{ 
-                        height: '80px',
+                        height: { xs: '70px', sm: '80px' },
                         border: `1px solid ${theme.palette.divider}`,
                         '&:hover': {
                           boxShadow: theme.shadows[2],
@@ -311,51 +240,88 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
                       role="article"
                       aria-label={`Selected seat ${seat.col} in row ${row?.index} of ${section?.label}`}
                     >
-                      <CardContent sx={{ p: 1, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                      <CardContent sx={{ 
+                        p: { xs: 0.75, sm: 1 }, 
+                        height: '100%', 
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        justifyContent: 'space-between' 
+                      }}>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                           <Chip
                             label={seat.priceTier === 1 ? 'Premium' : seat.priceTier === 2 ? 'Standard' : 'Economy'}
                             color={seat.priceTier === 1 ? 'primary' : seat.priceTier === 2 ? 'success' : 'secondary'}
                             size="small"
                             variant="outlined"
-                            sx={{ fontSize: '0.65rem', height: '18px' }}
+                            sx={{ 
+                              fontSize: { xs: '0.6rem', sm: '0.65rem' }, 
+                              height: { xs: '16px', sm: '18px' }
+                            }}
                             role="status"
                             aria-label={`${seat.priceTier === 1 ? 'Premium' : seat.priceTier === 2 ? 'Standard' : 'Economy'} price tier`}
                           />
-                          <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.65rem' }}>
+                          <Typography 
+                            variant="caption" 
+                            color="text.secondary" 
+                            sx={{ fontSize: { xs: '0.6rem', sm: '0.65rem' } }}
+                          >
                             {section?.label}
                           </Typography>
                         </Box>
                         
-                        <Typography variant="body2" fontWeight="bold" color="text.primary" sx={{ textAlign: 'center', fontSize: '0.8rem' }}>
+                        <Typography 
+                          variant="body2" 
+                          fontWeight="bold" 
+                          color="text.primary" 
+                          sx={{ 
+                            textAlign: 'center', 
+                            fontSize: { xs: '0.7rem', sm: '0.8rem' }
+                          }}
+                        >
                           Row {row?.index}, Seat {seat.col}
                         </Typography>
                         
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.65rem' }}>
+                          <Typography 
+                            variant="caption" 
+                            color="text.secondary" 
+                            sx={{ fontSize: { xs: '0.6rem', sm: '0.65rem' } }}
+                          >
                             {seat.id}
                           </Typography>
-                          <Typography variant="body2" fontWeight="bold" color="primary" sx={{ fontSize: '0.8rem' }}>
+                          <Typography 
+                            variant="body2" 
+                            fontWeight="bold" 
+                            color="primary" 
+                            sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' } }}
+                          >
                             ${seat.priceTier === 1 ? 150 : seat.priceTier === 2 ? 100 : 75}
                           </Typography>
                         </Box>
                       </CardContent>
                     </Card>
-                  </Grid>
+                  </Box>
                 );
               })}
-            </Grid>
+            </Box>
 
             {/* Checkout Footer */}
             <Box sx={{ 
               display: 'flex', 
+              flexDirection: { xs: 'column', sm: 'row' },
               justifyContent: 'space-between', 
-              alignItems: 'center',
+              alignItems: { xs: 'flex-start', sm: 'center' },
               pt: 1,
-              borderTop: `1px solid ${theme.palette.divider}`
+              borderTop: `1px solid ${theme.palette.divider}`,
+              gap: { xs: 2, sm: 0 }
             }}>
               <Box>
-                <Typography variant="h5" fontWeight="bold" color="primary">
+                <Typography 
+                  variant={isMobile ? "h6" : "h5"} 
+                  fontWeight="bold" 
+                  color="primary"
+                  sx={{ fontSize: { xs: '1.125rem', sm: '1.5rem' } }}
+                >
                   Total: ${Array.from(selectedSeats).reduce((total, seatId) => {
                     const seat = venue.sections
                       .flatMap(s => s.rows)
@@ -365,19 +331,23 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
                     return total + basePrice;
                   }, 0)}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography 
+                  variant="body2" 
+                  color="text.secondary"
+                  sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}
+                >
                   {selectedSeats.size} seat{selectedSeats.size !== 1 ? 's' : ''} selected
                 </Typography>
               </Box>
               <Button
                 variant="contained"
-                size="medium"
+                size={isMobile ? "small" : "medium"}
                 startIcon={<ShoppingCartIcon />}
                 sx={{ 
-                  px: 3, 
-                  py: 1,
+                  px: { xs: 2, sm: 3 }, 
+                  py: { xs: 0.75, sm: 1 },
                   borderRadius: 2,
-                  fontSize: '1rem',
+                  fontSize: { xs: '0.875rem', sm: '1rem' },
                   fontWeight: 'bold',
                   boxShadow: theme.shadows[2],
                   '&:hover': {
@@ -402,12 +372,18 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
           flex: 1, 
           borderRadius: 2,
           overflow: 'hidden',
-          background: theme.palette.background.default
+          background: theme.palette.background.default,
+          width: '100%'
         }}
         role="region"
         aria-label="Interactive seating chart"
       >
-        <Box sx={{ height: '100%', p: 2 }}>
+        <Box sx={{ 
+          height: '100%', 
+          p: { xs: 1, sm: 2 },
+          width: '100%',
+          overflow: 'hidden'
+        }}>
           <svg
             viewBox={`${minX - padding} ${minY - padding} ${viewBoxWidth} ${viewBoxHeight}`}
             preserveAspectRatio="xMidYMid meet"
@@ -415,7 +391,9 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
               width: '100%', 
               height: '100%',
               cursor: 'pointer',
-              borderRadius: theme.shape.borderRadius
+              borderRadius: theme.shape.borderRadius,
+              maxWidth: '100%',
+              overflow: 'visible'
             }}
             role="img"
             aria-label="Interactive venue seating chart"
@@ -560,6 +538,124 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
           </svg>
         </Box>
       </Paper>
+
+      {/* Compact Legend Below SVG */}
+      <Box
+        sx={{
+          mt: 2,
+          p: { xs: 1, sm: 1.5 },
+          border: `1px solid ${theme.palette.divider}`,
+          borderRadius: 1,
+          background: theme.palette.background.paper
+        }}
+        role="region"
+        aria-label="Venue legend"
+      >
+        <Box sx={{ 
+          display: 'flex', 
+          flexDirection: { xs: 'column', sm: 'row' },
+          gap: { xs: 1.5, sm: 3 },
+          alignItems: { xs: 'flex-start', sm: 'center' }
+        }}>
+          {/* Section Types */}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Typography 
+              variant="caption" 
+              sx={{ 
+                fontWeight: 600, 
+                fontSize: { xs: '0.7rem', sm: '0.75rem' },
+                color: 'text.secondary',
+                minWidth: 'fit-content'
+              }}
+            >
+              Sections:
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 0.5 }}>
+              {priceTiers.map((tier) => {
+                const color = tier === 1 ? 'primary' : tier === 2 ? 'success' : 'secondary';
+                const label = tier === 1 ? 'Premium' : tier === 2 ? 'Standard' : 'Economy';
+                return (
+                  <Box
+                    key={tier}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 0.5,
+                      px: 0.75,
+                      py: 0.25,
+                      border: `1px solid ${theme.palette[color].main}`,
+                      borderRadius: 0.5,
+                      fontSize: { xs: '0.6rem', sm: '0.7rem' }
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: 8,
+                        height: 8,
+                        backgroundColor: theme.palette[color].main,
+                        borderRadius: '50%'
+                      }}
+                    />
+                    <Typography variant="caption" sx={{ fontSize: 'inherit' }}>
+                      {label}
+                    </Typography>
+                  </Box>
+                );
+              })}
+            </Box>
+          </Box>
+
+          {/* Seat Status */}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Typography 
+              variant="caption" 
+              sx={{ 
+                fontWeight: 600, 
+                fontSize: { xs: '0.7rem', sm: '0.75rem' },
+                color: 'text.secondary',
+                minWidth: 'fit-content'
+              }}
+            >
+              Seats:
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 0.5 }}>
+              {[
+                { label: 'Available', color: theme.palette.success.main },
+                { label: 'Selected', color: theme.palette.success.main, filled: true },
+                { label: 'Reserved', color: theme.palette.warning.main },
+                { label: 'Sold', color: theme.palette.error.main }
+              ].map((status, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 0.5,
+                    px: 0.75,
+                    py: 0.25,
+                    border: `1px solid ${status.color}`,
+                    borderRadius: 0.5,
+                    fontSize: { xs: '0.6rem', sm: '0.7rem' }
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 8,
+                      height: 8,
+                      backgroundColor: status.filled ? status.color : 'transparent',
+                      border: status.filled ? 'none' : `1px solid ${status.color}`,
+                      borderRadius: '2px'
+                    }}
+                  />
+                  <Typography variant="caption" sx={{ fontSize: 'inherit' }}>
+                    {status.label}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </Box>
+      </Box>
     </Box>
   );
 }

@@ -79,7 +79,7 @@ The venue data is stored in `public/venue.json` and follows this structure:
 - **SVG-based rendering** for crisp, scalable graphics
 - **Event delegation** with single click handler on SVG parent
 - **CSS transforms** for smooth hover effects and animations
-- **Responsive grid layout** using Tailwind CSS
+- **Responsive grid layout** using Material-UI's responsive breakpoint system
 - **Type-safe data handling** with TypeScript interfaces
 
 ## Customization
@@ -87,7 +87,7 @@ The venue data is stored in `public/venue.json` and follows this structure:
 To add new sections or modify existing ones:
 1. Update the `venue.json` file with new section data
 2. The system automatically renders new sections based on the data
-3. Customize colors and styling in `src/app/globals.css`
+3. Customize colors and styling using Material-UI's theme system and sx props
 
 ## Performance
 

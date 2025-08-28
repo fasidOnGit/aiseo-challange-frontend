@@ -11,7 +11,8 @@ import {
   Alert,
   Button,
   Paper,
-  useTheme
+  useTheme,
+  useMediaQuery
 } from '@mui/material';
 import {
   Refresh as RefreshIcon,
@@ -39,6 +40,8 @@ export default function Home() {
   const { data: venue, isLoading, error, refetch } = useVenue();
   const [selectedSeats, setSelectedSeats] = useState<Set<string>>(new Set());
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   // Debounce selectedSeats for localStorage updates
   const debouncedSelectedSeats = useDebounce(selectedSeats, 500);
@@ -109,11 +112,25 @@ export default function Home() {
         aria-live="polite"
       >
         <Box sx={{ textAlign: 'center' }}>
-          <CircularProgress size={64} color="primary" sx={{ mb: 3 }} aria-label="Loading indicator" />
-          <Typography variant="h4" fontWeight="bold" color="text.primary" gutterBottom>
+          <CircularProgress 
+            size={isMobile ? 48 : 64} 
+            color="primary" 
+            sx={{ mb: { xs: 2, sm: 3 } }} 
+            aria-label="Loading indicator" 
+          />
+          <Typography 
+            variant={isMobile ? "h5" : "h4"} 
+            fontWeight="bold" 
+            color="text.primary" 
+            gutterBottom
+          >
             Loading Venue
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography 
+            variant="body1" 
+            color="text.secondary"
+            sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}
+          >
             Preparing your seating experience...
           </Typography>
         </Box>
@@ -135,11 +152,11 @@ export default function Home() {
         aria-label="Error loading venue"
         aria-live="assertive"
       >
-        <Container maxWidth="md">
+        <Container maxWidth="md" sx={{ px: { xs: 2, sm: 3 } }}>
           <Paper 
             elevation={3} 
             sx={{ 
-              p: 4, 
+              p: { xs: 3, sm: 4 }, 
               textAlign: 'center',
               borderRadius: 3,
               background: theme.palette.background.paper
@@ -147,16 +164,25 @@ export default function Home() {
           >
             <EventSeatIcon 
               sx={{ 
-                fontSize: 64, 
+                fontSize: { xs: 48, sm: 64 }, 
                 color: theme.palette.error.main, 
-                mb: 2 
+                mb: { xs: 1.5, sm: 2 } 
               }} 
               aria-hidden="true"
             />
-            <Typography variant="h4" fontWeight="bold" color="error" gutterBottom>
+            <Typography 
+              variant={isMobile ? "h5" : "h4"} 
+              fontWeight="bold" 
+              color="error" 
+              gutterBottom
+            >
               Failed to Load Venue
             </Typography>
-            <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+            <Typography 
+              variant="body1" 
+              color="text.secondary" 
+              sx={{ mb: { xs: 2, sm: 3 } }}
+            >
               {error.message || 'An error occurred while loading the venue data.'}
             </Typography>
             <Button
@@ -189,11 +215,25 @@ export default function Home() {
         aria-live="polite"
       >
         <Box sx={{ textAlign: 'center' }}>
-          <CircularProgress size={64} color="primary" sx={{ mb: 3 }} aria-label="Loading indicator" />
-          <Typography variant="h4" fontWeight="bold" color="text.primary" gutterBottom>
+          <CircularProgress 
+            size={isMobile ? 48 : 64} 
+            color="primary" 
+            sx={{ mb: { xs: 2, sm: 3 } }} 
+            aria-label="Loading indicator" 
+          />
+          <Typography 
+            variant={isMobile ? "h5" : "h4"} 
+            fontWeight="bold" 
+            color="text.primary" 
+            gutterBottom
+          >
             No Venue Data
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography 
+            variant="body1" 
+            color="text.secondary"
+            sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}
+          >
             Please check your venue configuration and try again.
           </Typography>
         </Box>
@@ -221,6 +261,7 @@ export default function Home() {
           textDecoration: 'none',
           borderRadius: '4px',
           zIndex: 9999,
+          fontSize: '0.875rem',
           '&:focus': {
             top: '6px',
             transition: 'top 0.3s ease'
@@ -242,22 +283,50 @@ export default function Home() {
         role="banner"
         aria-label="Venue header information"
       >
-        <Container maxWidth="xl">
-          <Box sx={{ py: 3 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Box>
-                <Typography variant="h3" fontWeight="bold" color="text.primary" gutterBottom>
+        <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3 } }}>
+          <Box sx={{ py: { xs: 2, sm: 3 } }}>
+            <Box sx={{ 
+              display: 'flex', 
+              flexDirection: { xs: 'column', sm: 'row' },
+              justifyContent: 'space-between', 
+              alignItems: { xs: 'flex-start', sm: 'center' },
+              gap: { xs: 2, sm: 0 }
+            }}>
+              <Box sx={{ flex: 1 }}>
+                <Typography 
+                  variant={isMobile ? "h4" : "h3"} 
+                  fontWeight="bold" 
+                  color="text.primary" 
+                  gutterBottom
+                  sx={{ fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' } }}
+                >
                   {venue.name}
                 </Typography>
-                <Typography variant="body1" color="text.secondary">
+                <Typography 
+                  variant="body1" 
+                  color="text.secondary"
+                  sx={{ fontSize: { xs: '0.875rem', sm: '1rem' } }}
+                >
                   Interactive Seating Chart
                 </Typography>
               </Box>
-              <Box sx={{ textAlign: 'right' }}>
-                <Typography variant="body2" color="text.secondary">
+              <Box sx={{ 
+                textAlign: { xs: 'left', sm: 'right' },
+                alignSelf: { xs: 'flex-start', sm: 'flex-end' }
+              }}>
+                <Typography 
+                  variant="body2" 
+                  color="text.secondary"
+                  sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}
+                >
                   Total Seats
                 </Typography>
-                <Typography variant="h3" fontWeight="bold" color="primary">
+                <Typography 
+                  variant={isMobile ? "h4" : "h3"} 
+                  fontWeight="bold" 
+                  color="primary"
+                  sx={{ fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' } }}
+                >
                   {totalSeats}
                 </Typography>
               </Box>
@@ -267,7 +336,16 @@ export default function Home() {
       </Paper>
 
       {/* Main content */}
-      <Container maxWidth="xl" sx={{ py: 3 }} role="main" aria-label="Venue seating chart and selection" id="main-content">
+      <Container 
+        maxWidth="xl" 
+        sx={{ 
+          py: { xs: 2, sm: 3 },
+          px: { xs: 2, sm: 3 }
+        }} 
+        role="main" 
+        aria-label="Venue seating chart and selection" 
+        id="main-content"
+      >
         <VenueSeating 
           venue={venue} 
           onSeatClick={handleSeatClick}
