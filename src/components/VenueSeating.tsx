@@ -1,3 +1,4 @@
+import React from 'react';
 import { Venue, Section, Seat } from '../lib/types';
 import { 
   Box, 
@@ -397,7 +398,10 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
               borderRadius: theme.shape.borderRadius,
               maxWidth: '100%',
               overflow: 'visible',
-              minHeight: isMobile ? '60vh' : 'auto' // Ensure good minimum height on mobile
+              minHeight: isMobile ? '60vh' : 'auto', // Ensure good minimum height on mobile
+              maxHeight: isMobile ? '40vh' : isTablet ? '50vh' : '70vh', // Responsive max height from globals.css
+              background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)', // Background gradient from globals.css
+              filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))' // Base shadow
             }}
             role="img"
             aria-label="Interactive venue seating chart"
@@ -410,8 +414,24 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
               Maximum of 8 seats can be selected.
             </desc>
             
-            {/* Define seat symbols */}
+            {/* Define seat symbols - hover effects handled in component */}
             <defs>
+              <style>
+                {`
+                  .venue-text {
+                    font-family: system-ui, -apple-system, sans-serif;
+                    font-weight: 600;
+                    font-size: 14px;
+                    fill: #374151;
+                  }
+                  .venue-row-text {
+                    font-family: system-ui, -apple-system, sans-serif;
+                    font-size: 12px;
+                    font-weight: 500;
+                    fill: #6b7280;
+                  }
+                `}
+              </style>
               <symbol id="seat-available" viewBox="0 0 24 24">
                 <rect
                   x="2"
@@ -503,8 +523,9 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
                     x={transform.x + sectionWidth / 2}
                     y={transform.y - 15}
                     textAnchor="middle"
+                    className="venue-text"
                     fill={theme.palette.text.primary}
-                    fontSize="12"
+                    fontSize="14"
                     fontWeight="600"
                     role="text"
                     aria-label={`Section ${section.label}`}
@@ -711,6 +732,7 @@ function SeatElement({ seat, sectionId, rowIndex, onSeatClick, isSelected, absol
       style={{ cursor }}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
+
       role="button"
       tabIndex={isClickable && !isAtLimit ? 0 : -1}
       aria-label={`Seat ${seat.col} in row ${rowIndex} of section ${sectionId}${isAtLimit ? ' - Maximum seats reached' : ''}`}
