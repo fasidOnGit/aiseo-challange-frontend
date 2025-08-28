@@ -1,0 +1,2178 @@
+{
+  "venueId": "simple-arena-01",
+  "name": "Simple Arena",
+  "map": {
+    "width": 1200,
+    "height": 800
+  },
+  "sections": [
+    {
+      "id": "A",
+      "label": "Lower Bowl A",
+      "transform": {
+        "x": 100,
+        "y": 100,
+        "scale": 1
+      },
+      "rows": [
+        {
+          "index": 1,
+          "seats": [
+            {
+              "id": "A-01-01",
+              "col": 1,
+              "x": 50,
+              "y": 50,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-01-02",
+              "col": 2,
+              "x": 90,
+              "y": 50,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-01-03",
+              "col": 3,
+              "x": 130,
+              "y": 50,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-01-04",
+              "col": 4,
+              "x": 170,
+              "y": 50,
+              "priceTier": 1,
+              "status": "reserved"
+            },
+            {
+              "id": "A-01-05",
+              "col": 5,
+              "x": 210,
+              "y": 50,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-01-06",
+              "col": 6,
+              "x": 250,
+              "y": 50,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-01-07",
+              "col": 7,
+              "x": 290,
+              "y": 50,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-01-08",
+              "col": 8,
+              "x": 330,
+              "y": 50,
+              "priceTier": 1,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "seats": [
+            {
+              "id": "A-02-01",
+              "col": 1,
+              "x": 50,
+              "y": 95,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-02-02",
+              "col": 2,
+              "x": 90,
+              "y": 95,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-02-03",
+              "col": 3,
+              "x": 130,
+              "y": 95,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-02-04",
+              "col": 4,
+              "x": 170,
+              "y": 95,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-02-05",
+              "col": 5,
+              "x": 210,
+              "y": 95,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-02-06",
+              "col": 6,
+              "x": 250,
+              "y": 95,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-02-07",
+              "col": 7,
+              "x": 290,
+              "y": 95,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-02-08",
+              "col": 8,
+              "x": 330,
+              "y": 95,
+              "priceTier": 1,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "seats": [
+            {
+              "id": "A-03-01",
+              "col": 1,
+              "x": 50,
+              "y": 140,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-03-02",
+              "col": 2,
+              "x": 90,
+              "y": 140,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-03-03",
+              "col": 3,
+              "x": 130,
+              "y": 140,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-03-04",
+              "col": 4,
+              "x": 170,
+              "y": 140,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-03-05",
+              "col": 5,
+              "x": 210,
+              "y": 140,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-03-06",
+              "col": 6,
+              "x": 250,
+              "y": 140,
+              "priceTier": 1,
+              "status": "reserved"
+            },
+            {
+              "id": "A-03-07",
+              "col": 7,
+              "x": 290,
+              "y": 140,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-03-08",
+              "col": 8,
+              "x": 330,
+              "y": 140,
+              "priceTier": 1,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "seats": [
+            {
+              "id": "A-04-01",
+              "col": 1,
+              "x": 50,
+              "y": 185,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-04-02",
+              "col": 2,
+              "x": 90,
+              "y": 185,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-04-03",
+              "col": 3,
+              "x": 130,
+              "y": 185,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-04-04",
+              "col": 4,
+              "x": 170,
+              "y": 185,
+              "priceTier": 1,
+              "status": "reserved"
+            },
+            {
+              "id": "A-04-05",
+              "col": 5,
+              "x": 210,
+              "y": 185,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-04-06",
+              "col": 6,
+              "x": 250,
+              "y": 185,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-04-07",
+              "col": 7,
+              "x": 290,
+              "y": 185,
+              "priceTier": 1,
+              "status": "reserved"
+            },
+            {
+              "id": "A-04-08",
+              "col": 8,
+              "x": 330,
+              "y": 185,
+              "priceTier": 1,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "seats": [
+            {
+              "id": "A-05-01",
+              "col": 1,
+              "x": 50,
+              "y": 230,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-05-02",
+              "col": 2,
+              "x": 90,
+              "y": 230,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-05-03",
+              "col": 3,
+              "x": 130,
+              "y": 230,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-05-04",
+              "col": 4,
+              "x": 170,
+              "y": 230,
+              "priceTier": 1,
+              "status": "reserved"
+            },
+            {
+              "id": "A-05-05",
+              "col": 5,
+              "x": 210,
+              "y": 230,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-05-06",
+              "col": 6,
+              "x": 250,
+              "y": 230,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-05-07",
+              "col": 7,
+              "x": 290,
+              "y": 230,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-05-08",
+              "col": 8,
+              "x": 330,
+              "y": 230,
+              "priceTier": 1,
+              "status": "sold"
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "seats": [
+            {
+              "id": "A-06-01",
+              "col": 1,
+              "x": 50,
+              "y": 275,
+              "priceTier": 1,
+              "status": "reserved"
+            },
+            {
+              "id": "A-06-02",
+              "col": 2,
+              "x": 90,
+              "y": 275,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-06-03",
+              "col": 3,
+              "x": 130,
+              "y": 275,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-06-04",
+              "col": 4,
+              "x": 170,
+              "y": 275,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-06-05",
+              "col": 5,
+              "x": 210,
+              "y": 275,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "A-06-06",
+              "col": 6,
+              "x": 250,
+              "y": 275,
+              "priceTier": 1,
+              "status": "reserved"
+            },
+            {
+              "id": "A-06-07",
+              "col": 7,
+              "x": 290,
+              "y": 275,
+              "priceTier": 1,
+              "status": "sold"
+            },
+            {
+              "id": "A-06-08",
+              "col": 8,
+              "x": 330,
+              "y": 275,
+              "priceTier": 1,
+              "status": "available"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "label": "Lower Bowl B",
+      "transform": {
+        "x": 500,
+        "y": 100,
+        "scale": 1
+      },
+      "rows": [
+        {
+          "index": 1,
+          "seats": [
+            {
+              "id": "B-01-01",
+              "col": 1,
+              "x": 50,
+              "y": 50,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-01-02",
+              "col": 2,
+              "x": 90,
+              "y": 50,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-01-03",
+              "col": 3,
+              "x": 130,
+              "y": 50,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-01-04",
+              "col": 4,
+              "x": 170,
+              "y": 50,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-01-05",
+              "col": 5,
+              "x": 210,
+              "y": 50,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-01-06",
+              "col": 6,
+              "x": 250,
+              "y": 50,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-01-07",
+              "col": 7,
+              "x": 290,
+              "y": 50,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-01-08",
+              "col": 8,
+              "x": 330,
+              "y": 50,
+              "priceTier": 1,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "seats": [
+            {
+              "id": "B-02-01",
+              "col": 1,
+              "x": 50,
+              "y": 95,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-02-02",
+              "col": 2,
+              "x": 90,
+              "y": 95,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-02-03",
+              "col": 3,
+              "x": 130,
+              "y": 95,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-02-04",
+              "col": 4,
+              "x": 170,
+              "y": 95,
+              "priceTier": 1,
+              "status": "sold"
+            },
+            {
+              "id": "B-02-05",
+              "col": 5,
+              "x": 210,
+              "y": 95,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-02-06",
+              "col": 6,
+              "x": 250,
+              "y": 95,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-02-07",
+              "col": 7,
+              "x": 290,
+              "y": 95,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-02-08",
+              "col": 8,
+              "x": 330,
+              "y": 95,
+              "priceTier": 1,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "seats": [
+            {
+              "id": "B-03-01",
+              "col": 1,
+              "x": 50,
+              "y": 140,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-03-02",
+              "col": 2,
+              "x": 90,
+              "y": 140,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-03-03",
+              "col": 3,
+              "x": 130,
+              "y": 140,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-03-04",
+              "col": 4,
+              "x": 170,
+              "y": 140,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-03-05",
+              "col": 5,
+              "x": 210,
+              "y": 140,
+              "priceTier": 1,
+              "status": "sold"
+            },
+            {
+              "id": "B-03-06",
+              "col": 6,
+              "x": 250,
+              "y": 140,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-03-07",
+              "col": 7,
+              "x": 290,
+              "y": 140,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-03-08",
+              "col": 8,
+              "x": 330,
+              "y": 140,
+              "priceTier": 1,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "seats": [
+            {
+              "id": "B-04-01",
+              "col": 1,
+              "x": 50,
+              "y": 185,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-04-02",
+              "col": 2,
+              "x": 90,
+              "y": 185,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-04-03",
+              "col": 3,
+              "x": 130,
+              "y": 185,
+              "priceTier": 1,
+              "status": "reserved"
+            },
+            {
+              "id": "B-04-04",
+              "col": 4,
+              "x": 170,
+              "y": 185,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-04-05",
+              "col": 5,
+              "x": 210,
+              "y": 185,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-04-06",
+              "col": 6,
+              "x": 250,
+              "y": 185,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-04-07",
+              "col": 7,
+              "x": 290,
+              "y": 185,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-04-08",
+              "col": 8,
+              "x": 330,
+              "y": 185,
+              "priceTier": 1,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "seats": [
+            {
+              "id": "B-05-01",
+              "col": 1,
+              "x": 50,
+              "y": 230,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-05-02",
+              "col": 2,
+              "x": 90,
+              "y": 230,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-05-03",
+              "col": 3,
+              "x": 130,
+              "y": 230,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-05-04",
+              "col": 4,
+              "x": 170,
+              "y": 230,
+              "priceTier": 1,
+              "status": "reserved"
+            },
+            {
+              "id": "B-05-05",
+              "col": 5,
+              "x": 210,
+              "y": 230,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-05-06",
+              "col": 6,
+              "x": 250,
+              "y": 230,
+              "priceTier": 1,
+              "status": "reserved"
+            },
+            {
+              "id": "B-05-07",
+              "col": 7,
+              "x": 290,
+              "y": 230,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-05-08",
+              "col": 8,
+              "x": 330,
+              "y": 230,
+              "priceTier": 1,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "seats": [
+            {
+              "id": "B-06-01",
+              "col": 1,
+              "x": 50,
+              "y": 275,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-06-02",
+              "col": 2,
+              "x": 90,
+              "y": 275,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-06-03",
+              "col": 3,
+              "x": 130,
+              "y": 275,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-06-04",
+              "col": 4,
+              "x": 170,
+              "y": 275,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-06-05",
+              "col": 5,
+              "x": 210,
+              "y": 275,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-06-06",
+              "col": 6,
+              "x": 250,
+              "y": 275,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-06-07",
+              "col": 7,
+              "x": 290,
+              "y": 275,
+              "priceTier": 1,
+              "status": "available"
+            },
+            {
+              "id": "B-06-08",
+              "col": 8,
+              "x": 330,
+              "y": 275,
+              "priceTier": 1,
+              "status": "available"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "label": "Upper Bowl C",
+      "transform": {
+        "x": 100,
+        "y": 400,
+        "scale": 0.9
+      },
+      "rows": [
+        {
+          "index": 1,
+          "seats": [
+            {
+              "id": "C-01-01",
+              "col": 1,
+              "x": 50,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-01-02",
+              "col": 2,
+              "x": 90,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-01-03",
+              "col": 3,
+              "x": 130,
+              "y": 50,
+              "priceTier": 2,
+              "status": "reserved"
+            },
+            {
+              "id": "C-01-04",
+              "col": 4,
+              "x": 170,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-01-05",
+              "col": 5,
+              "x": 210,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-01-06",
+              "col": 6,
+              "x": 250,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-01-07",
+              "col": 7,
+              "x": 290,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-01-08",
+              "col": 8,
+              "x": 330,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-01-09",
+              "col": 9,
+              "x": 370,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-01-10",
+              "col": 10,
+              "x": 410,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "seats": [
+            {
+              "id": "C-02-01",
+              "col": 1,
+              "x": 50,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-02-02",
+              "col": 2,
+              "x": 90,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-02-03",
+              "col": 3,
+              "x": 130,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-02-04",
+              "col": 4,
+              "x": 170,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-02-05",
+              "col": 5,
+              "x": 210,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-02-06",
+              "col": 6,
+              "x": 250,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-02-07",
+              "col": 7,
+              "x": 290,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-02-08",
+              "col": 8,
+              "x": 330,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-02-09",
+              "col": 9,
+              "x": 370,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-02-10",
+              "col": 10,
+              "x": 410,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "seats": [
+            {
+              "id": "C-03-01",
+              "col": 1,
+              "x": 50,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-03-02",
+              "col": 2,
+              "x": 90,
+              "y": 140,
+              "priceTier": 2,
+              "status": "reserved"
+            },
+            {
+              "id": "C-03-03",
+              "col": 3,
+              "x": 130,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-03-04",
+              "col": 4,
+              "x": 170,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-03-05",
+              "col": 5,
+              "x": 210,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-03-06",
+              "col": 6,
+              "x": 250,
+              "y": 140,
+              "priceTier": 2,
+              "status": "reserved"
+            },
+            {
+              "id": "C-03-07",
+              "col": 7,
+              "x": 290,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-03-08",
+              "col": 8,
+              "x": 330,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-03-09",
+              "col": 9,
+              "x": 370,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-03-10",
+              "col": 10,
+              "x": 410,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "seats": [
+            {
+              "id": "C-04-01",
+              "col": 1,
+              "x": 50,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-04-02",
+              "col": 2,
+              "x": 90,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-04-03",
+              "col": 3,
+              "x": 130,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-04-04",
+              "col": 4,
+              "x": 170,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-04-05",
+              "col": 5,
+              "x": 210,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-04-06",
+              "col": 6,
+              "x": 250,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-04-07",
+              "col": 7,
+              "x": 290,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-04-08",
+              "col": 8,
+              "x": 330,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-04-09",
+              "col": 9,
+              "x": 370,
+              "y": 185,
+              "priceTier": 2,
+              "status": "sold"
+            },
+            {
+              "id": "C-04-10",
+              "col": 10,
+              "x": 410,
+              "y": 185,
+              "priceTier": 2,
+              "status": "reserved"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "seats": [
+            {
+              "id": "C-05-01",
+              "col": 1,
+              "x": 50,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-05-02",
+              "col": 2,
+              "x": 90,
+              "y": 230,
+              "priceTier": 2,
+              "status": "reserved"
+            },
+            {
+              "id": "C-05-03",
+              "col": 3,
+              "x": 130,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-05-04",
+              "col": 4,
+              "x": 170,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-05-05",
+              "col": 5,
+              "x": 210,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-05-06",
+              "col": 6,
+              "x": 250,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-05-07",
+              "col": 7,
+              "x": 290,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-05-08",
+              "col": 8,
+              "x": 330,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-05-09",
+              "col": 9,
+              "x": 370,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "C-05-10",
+              "col": 10,
+              "x": 410,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "D",
+      "label": "Upper Bowl D",
+      "transform": {
+        "x": 600,
+        "y": 400,
+        "scale": 0.9
+      },
+      "rows": [
+        {
+          "index": 1,
+          "seats": [
+            {
+              "id": "D-01-01",
+              "col": 1,
+              "x": 50,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-01-02",
+              "col": 2,
+              "x": 90,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-01-03",
+              "col": 3,
+              "x": 130,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-01-04",
+              "col": 4,
+              "x": 170,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-01-05",
+              "col": 5,
+              "x": 210,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-01-06",
+              "col": 6,
+              "x": 250,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-01-07",
+              "col": 7,
+              "x": 290,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-01-08",
+              "col": 8,
+              "x": 330,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-01-09",
+              "col": 9,
+              "x": 370,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-01-10",
+              "col": 10,
+              "x": 410,
+              "y": 50,
+              "priceTier": 2,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "seats": [
+            {
+              "id": "D-02-01",
+              "col": 1,
+              "x": 50,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-02-02",
+              "col": 2,
+              "x": 90,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-02-03",
+              "col": 3,
+              "x": 130,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-02-04",
+              "col": 4,
+              "x": 170,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-02-05",
+              "col": 5,
+              "x": 210,
+              "y": 95,
+              "priceTier": 2,
+              "status": "sold"
+            },
+            {
+              "id": "D-02-06",
+              "col": 6,
+              "x": 250,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-02-07",
+              "col": 7,
+              "x": 290,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-02-08",
+              "col": 8,
+              "x": 330,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-02-09",
+              "col": 9,
+              "x": 370,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-02-10",
+              "col": 10,
+              "x": 410,
+              "y": 95,
+              "priceTier": 2,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "seats": [
+            {
+              "id": "D-03-01",
+              "col": 1,
+              "x": 50,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-03-02",
+              "col": 2,
+              "x": 90,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-03-03",
+              "col": 3,
+              "x": 130,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-03-04",
+              "col": 4,
+              "x": 170,
+              "y": 140,
+              "priceTier": 2,
+              "status": "reserved"
+            },
+            {
+              "id": "D-03-05",
+              "col": 5,
+              "x": 210,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-03-06",
+              "col": 6,
+              "x": 250,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-03-07",
+              "col": 7,
+              "x": 290,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-03-08",
+              "col": 8,
+              "x": 330,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-03-09",
+              "col": 9,
+              "x": 370,
+              "y": 140,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-03-10",
+              "col": 10,
+              "x": 410,
+              "y": 140,
+              "priceTier": 2,
+              "status": "sold"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "seats": [
+            {
+              "id": "D-04-01",
+              "col": 1,
+              "x": 50,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-04-02",
+              "col": 2,
+              "x": 90,
+              "y": 185,
+              "priceTier": 2,
+              "status": "reserved"
+            },
+            {
+              "id": "D-04-03",
+              "col": 3,
+              "x": 130,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-04-04",
+              "col": 4,
+              "x": 170,
+              "y": 185,
+              "priceTier": 2,
+              "status": "reserved"
+            },
+            {
+              "id": "D-04-05",
+              "col": 5,
+              "x": 210,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-04-06",
+              "col": 6,
+              "x": 250,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-04-07",
+              "col": 7,
+              "x": 290,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-04-08",
+              "col": 8,
+              "x": 330,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-04-09",
+              "col": 9,
+              "x": 370,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-04-10",
+              "col": 10,
+              "x": 410,
+              "y": 185,
+              "priceTier": 2,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "seats": [
+            {
+              "id": "D-05-01",
+              "col": 1,
+              "x": 50,
+              "y": 230,
+              "priceTier": 2,
+              "status": "sold"
+            },
+            {
+              "id": "D-05-02",
+              "col": 2,
+              "x": 90,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-05-03",
+              "col": 3,
+              "x": 130,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-05-04",
+              "col": 4,
+              "x": 170,
+              "y": 230,
+              "priceTier": 2,
+              "status": "reserved"
+            },
+            {
+              "id": "D-05-05",
+              "col": 5,
+              "x": 210,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-05-06",
+              "col": 6,
+              "x": 250,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-05-07",
+              "col": 7,
+              "x": 290,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-05-08",
+              "col": 8,
+              "x": 330,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-05-09",
+              "col": 9,
+              "x": 370,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            },
+            {
+              "id": "D-05-10",
+              "col": 10,
+              "x": 410,
+              "y": 230,
+              "priceTier": 2,
+              "status": "available"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "E",
+      "label": "VIP Box E",
+      "transform": {
+        "x": 900,
+        "y": 150,
+        "scale": 0.8
+      },
+      "rows": [
+        {
+          "index": 1,
+          "seats": [
+            {
+              "id": "E-01-01",
+              "col": 1,
+              "x": 50,
+              "y": 50,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-01-02",
+              "col": 2,
+              "x": 90,
+              "y": 50,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-01-03",
+              "col": 3,
+              "x": 130,
+              "y": 50,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-01-04",
+              "col": 4,
+              "x": 170,
+              "y": 50,
+              "priceTier": 3,
+              "status": "reserved"
+            },
+            {
+              "id": "E-01-05",
+              "col": 5,
+              "x": 210,
+              "y": 50,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-01-06",
+              "col": 6,
+              "x": 250,
+              "y": 50,
+              "priceTier": 3,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "seats": [
+            {
+              "id": "E-02-01",
+              "col": 1,
+              "x": 50,
+              "y": 95,
+              "priceTier": 3,
+              "status": "sold"
+            },
+            {
+              "id": "E-02-02",
+              "col": 2,
+              "x": 90,
+              "y": 95,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-02-03",
+              "col": 3,
+              "x": 130,
+              "y": 95,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-02-04",
+              "col": 4,
+              "x": 170,
+              "y": 95,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-02-05",
+              "col": 5,
+              "x": 210,
+              "y": 95,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-02-06",
+              "col": 6,
+              "x": 250,
+              "y": 95,
+              "priceTier": 3,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "seats": [
+            {
+              "id": "E-03-01",
+              "col": 1,
+              "x": 50,
+              "y": 140,
+              "priceTier": 3,
+              "status": "reserved"
+            },
+            {
+              "id": "E-03-02",
+              "col": 2,
+              "x": 90,
+              "y": 140,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-03-03",
+              "col": 3,
+              "x": 130,
+              "y": 140,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-03-04",
+              "col": 4,
+              "x": 170,
+              "y": 140,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-03-05",
+              "col": 5,
+              "x": 210,
+              "y": 140,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-03-06",
+              "col": 6,
+              "x": 250,
+              "y": 140,
+              "priceTier": 3,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "seats": [
+            {
+              "id": "E-04-01",
+              "col": 1,
+              "x": 50,
+              "y": 185,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-04-02",
+              "col": 2,
+              "x": 90,
+              "y": 185,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-04-03",
+              "col": 3,
+              "x": 130,
+              "y": 185,
+              "priceTier": 3,
+              "status": "reserved"
+            },
+            {
+              "id": "E-04-04",
+              "col": 4,
+              "x": 170,
+              "y": 185,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-04-05",
+              "col": 5,
+              "x": 210,
+              "y": 185,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "E-04-06",
+              "col": 6,
+              "x": 250,
+              "y": 185,
+              "priceTier": 3,
+              "status": "available"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F",
+      "label": "VIP Box F",
+      "transform": {
+        "x": 900,
+        "y": 400,
+        "scale": 0.8
+      },
+      "rows": [
+        {
+          "index": 1,
+          "seats": [
+            {
+              "id": "F-01-01",
+              "col": 1,
+              "x": 50,
+              "y": 50,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "F-01-02",
+              "col": 2,
+              "x": 90,
+              "y": 50,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "F-01-03",
+              "col": 3,
+              "x": 130,
+              "y": 50,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "F-01-04",
+              "col": 4,
+              "x": 170,
+              "y": 50,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "F-01-05",
+              "col": 5,
+              "x": 210,
+              "y": 50,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "F-01-06",
+              "col": 6,
+              "x": 250,
+              "y": 50,
+              "priceTier": 3,
+              "status": "sold"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "seats": [
+            {
+              "id": "F-02-01",
+              "col": 1,
+              "x": 50,
+              "y": 95,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "F-02-02",
+              "col": 2,
+              "x": 90,
+              "y": 95,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "F-02-03",
+              "col": 3,
+              "x": 130,
+              "y": 95,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "F-02-04",
+              "col": 4,
+              "x": 170,
+              "y": 95,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "F-02-05",
+              "col": 5,
+              "x": 210,
+              "y": 95,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "F-02-06",
+              "col": 6,
+              "x": 250,
+              "y": 95,
+              "priceTier": 3,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "seats": [
+            {
+              "id": "F-03-01",
+              "col": 1,
+              "x": 50,
+              "y": 140,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "F-03-02",
+              "col": 2,
+              "x": 90,
+              "y": 140,
+              "priceTier": 3,
+              "status": "sold"
+            },
+            {
+              "id": "F-03-03",
+              "col": 3,
+              "x": 130,
+              "y": 140,
+              "priceTier": 3,
+              "status": "reserved"
+            },
+            {
+              "id": "F-03-04",
+              "col": 4,
+              "x": 170,
+              "y": 140,
+              "priceTier": 3,
+              "status": "sold"
+            },
+            {
+              "id": "F-03-05",
+              "col": 5,
+              "x": 210,
+              "y": 140,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "F-03-06",
+              "col": 6,
+              "x": 250,
+              "y": 140,
+              "priceTier": 3,
+              "status": "available"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "seats": [
+            {
+              "id": "F-04-01",
+              "col": 1,
+              "x": 50,
+              "y": 185,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "F-04-02",
+              "col": 2,
+              "x": 90,
+              "y": 185,
+              "priceTier": 3,
+              "status": "reserved"
+            },
+            {
+              "id": "F-04-03",
+              "col": 3,
+              "x": 130,
+              "y": 185,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "F-04-04",
+              "col": 4,
+              "x": 170,
+              "y": 185,
+              "priceTier": 3,
+              "status": "reserved"
+            },
+            {
+              "id": "F-04-05",
+              "col": 5,
+              "x": 210,
+              "y": 185,
+              "priceTier": 3,
+              "status": "available"
+            },
+            {
+              "id": "F-04-06",
+              "col": 6,
+              "x": 250,
+              "y": 185,
+              "priceTier": 3,
+              "status": "available"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
