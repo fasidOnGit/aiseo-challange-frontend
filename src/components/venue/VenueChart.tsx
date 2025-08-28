@@ -14,7 +14,7 @@ import { VENUE_CONFIG } from '../../lib/constants/venue';
 
 interface VenueChartProps {
   venue: Venue;
-  selectedSeats: Set<string>;
+  selectedSeats: string[];
   onSeatClick: (seatId: string, sectionId: string, rowIndex: number, col: number) => void;
   isAtSelectionLimit: boolean;
 }
@@ -110,10 +110,10 @@ export function VenueChart({
                     sectionId={section.id}
                     rowIndex={row.index}
                     onSeatClick={onSeatClick}
-                    isSelected={selectedSeats.has(seat.id)}
+                    isSelected={selectedSeats.includes(seat.id)}
                     absoluteX={absoluteX}
                     absoluteY={absoluteY}
-                    isAtSelectionLimit={isAtSelectionLimit && !selectedSeats.has(seat.id)}
+                    isAtSelectionLimit={isAtSelectionLimit && !selectedSeats.includes(seat.id)}
                   />
                 );
               })

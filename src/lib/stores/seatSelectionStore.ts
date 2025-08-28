@@ -1,19 +1,20 @@
 import { create } from 'zustand';
-import { useDebounce } from 'use-debounce';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import { useEffect } from 'react';
-import { storageAdapter } from '../adapters/localStorage';
 import { Venue, Seat } from '../types';
 import { VENUE_CONFIG } from '../constants/venue';
 
 interface SeatSelectionState {
-  selectedSeats: Set<string>;
+  selectedSeats: string[]; // Array for JSON serialization
   isModalOpen: boolean;
+  venueId?: string; // Track which venue the selections belong to
   // Actions
   selectSeat: (seatId: string) => void;
   deselectSeat: (seatId: string) => void;
   toggleSeat: (seatId: string, seat: Seat) => void;
   clearSelection: () => void;
-  setSelectedSeats: (seats: Set<string>) => void;
+  setSelectedSeats: (seats: string[]) => void;
+  setVenueId: (venueId: string) => void;
   openModal: () => void;
   closeModal: () => void;
   // Computed
@@ -22,157 +23,128 @@ interface SeatSelectionState {
   canSelectSeat: (seat: Seat) => boolean;
 }
 
-export const useSeatSelectionStore = create<SeatSelectionState>((set, get) => ({
-  selectedSeats: new Set(),
-  isModalOpen: false,
+export const useSeatSelectionStore = create<SeatSelectionState>()(
+  persist(
+    (set, get) => ({
+      selectedSeats: [],
+      isModalOpen: false,
+      venueId: undefined,
 
-  selectSeat: (seatId) => {
-    const { selectedSeats, isAtLimit } = get();
-    if (!isAtLimit() && !selectedSeats.has(seatId)) {
-      const newSelectedSeats = new Set(selectedSeats);
-      newSelectedSeats.add(seatId);
-      set({ selectedSeats: newSelectedSeats });
+      selectSeat: (seatId) => {
+        const { selectedSeats, isAtLimit } = get();
+        if (!isAtLimit() && !selectedSeats.includes(seatId)) {
+          set({ selectedSeats: [...selectedSeats, seatId] });
+        }
+      },
+
+      deselectSeat: (seatId) => {
+        const { selectedSeats } = get();
+        set({ selectedSeats: selectedSeats.filter(id => id !== seatId) });
+      },
+
+      toggleSeat: (seatId, seat) => {
+        if (seat.status !== 'available') return;
+        
+        const { selectedSeats, selectSeat, deselectSeat } = get();
+        if (selectedSeats.includes(seatId)) {
+          deselectSeat(seatId);
+        } else {
+          selectSeat(seatId);
+        }
+      },
+
+      clearSelection: () => {
+        set({ selectedSeats: [] });
+      },
+
+      setSelectedSeats: (seats) => {
+        set({ selectedSeats: seats });
+      },
+
+      setVenueId: (venueId) => {
+        const { venueId: currentVenueId, clearSelection } = get();
+        if (currentVenueId && currentVenueId !== venueId) {
+          // Clear selections when switching venues
+          clearSelection();
+        }
+        set({ venueId });
+      },
+
+      openModal: () => {
+        set({ isModalOpen: true });
+      },
+
+      closeModal: () => {
+        set({ isModalOpen: false });
+      },
+
+      // Computed getters
+      isAtLimit: () => {
+        const { selectedSeats } = get();
+        return selectedSeats.length >= VENUE_CONFIG.maxSeatsSelection;
+      },
+
+      isSeatSelected: (seatId) => {
+        const { selectedSeats } = get();
+        return selectedSeats.includes(seatId);
+      },
+
+      canSelectSeat: (seat) => {
+        return seat.status === 'available';
+      },
+    }),
+    {
+      name: 'venue-seat-selection',
+      storage: createJSONStorage(() => {
+        // Only use localStorage on client side
+        if (typeof window !== 'undefined') {
+          return localStorage;
+        }
+        // Return a dummy storage for SSR
+        return {
+          getItem: () => null,
+          setItem: () => {},
+          removeItem: () => {},
+        };
+      }),
+      partialize: (state) => ({ 
+        selectedSeats: state.selectedSeats,
+        venueId: state.venueId 
+      }),
+      // Only persist selectedSeats and venueId, not modal state
     }
-  },
-
-  deselectSeat: (seatId) => {
-    const { selectedSeats } = get();
-    if (selectedSeats.has(seatId)) {
-      const newSelectedSeats = new Set(selectedSeats);
-      newSelectedSeats.delete(seatId);
-      set({ selectedSeats: newSelectedSeats });
-    }
-  },
-
-  toggleSeat: (seatId, seat) => {
-    if (seat.status !== 'available') return;
-    
-    const { selectedSeats, selectSeat, deselectSeat } = get();
-    if (selectedSeats.has(seatId)) {
-      deselectSeat(seatId);
-    } else {
-      selectSeat(seatId);
-    }
-  },
-
-  clearSelection: () => {
-    set({ selectedSeats: new Set() });
-  },
-
-  setSelectedSeats: (seats) => {
-    set({ selectedSeats: seats });
-  },
-
-  openModal: () => {
-    set({ isModalOpen: true });
-  },
-
-  closeModal: () => {
-    set({ isModalOpen: false });
-  },
-
-  // Computed getters
-  isAtLimit: () => {
-    const { selectedSeats } = get();
-    return selectedSeats.size >= VENUE_CONFIG.maxSeatsSelection;
-  },
-
-  isSeatSelected: (seatId) => {
-    const { selectedSeats } = get();
-    return selectedSeats.has(seatId);
-  },
-
-  canSelectSeat: (seat) => {
-    return seat.status === 'available';
-  },
-}));
+  )
+);
 
 /**
- * Hook to handle seat selection persistence with localStorage
- * Handles loading and saving seat selections automatically
+ * Hook to handle venue changes and validate persisted seat selections
+ * Zustand persist middleware handles the actual persistence automatically
  */
-export function useSeatSelectionPersistence(venue?: Venue) {
-  const store = useSeatSelectionStore();
+export function useSeatSelectionSync(venue?: Venue) {
+  const { setVenueId, selectedSeats, setSelectedSeats } = useSeatSelectionStore();
   
-  // Convert Set to Array for debouncing
-  const selectedSeatsArray = Array.from(store.selectedSeats);
-  const [debouncedSeats] = useDebounce(selectedSeatsArray, 500);
-
-  // Save immediately before page unload to prevent data loss
+  // Set venue ID and validate selections when venue changes
   useEffect(() => {
     if (!venue?.venueId) return;
-
-    const handleBeforeUnload = async () => {
-      try {
-        // Save current state immediately (not debounced)
-        await storageAdapter.save(venue.venueId, selectedSeatsArray);
-      } catch (error) {
-        console.warn('Failed emergency save:', error);
-      }
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    window.addEventListener('pagehide', handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-      window.removeEventListener('pagehide', handleBeforeUnload);
-    };
-  }, [venue?.venueId, selectedSeatsArray]);
-
-  // Load from localStorage on venue change
-  useEffect(() => {
-    if (!venue?.venueId) {
-      return;
-    }
-
-    async function loadSeats() {
-      try {
-        const savedSeatIds = await storageAdapter.load(venue!.venueId);
-        
-        if (savedSeatIds.length === 0) {
-          return;
-        }
-        
-        // Validate that saved seats still exist and are available
-        const validSeatIds = savedSeatIds.filter(seatId =>
-          venue!.sections.some(section =>
-            section.rows.some(row =>
-              row.seats.some(seat => 
-                seat.id === seatId && seat.status === 'available'
-              )
+    
+    setVenueId(venue.venueId);
+    
+    // Validate that persisted seats still exist and are available
+    if (selectedSeats.length > 0) {
+      const validSeatIds = selectedSeats.filter(seatId =>
+        venue.sections.some(section =>
+          section.rows.some(row =>
+            row.seats.some(seat => 
+              seat.id === seatId && seat.status === 'available'
             )
           )
-        );
-
-        if (validSeatIds.length > 0) {
-          store.setSelectedSeats(new Set(validSeatIds));
-        }
-      } catch (error) {
-        console.warn('Failed to load seat selection from storage:', error);
-        store.setSelectedSeats(new Set());
+        )
+      );
+      
+      // Update selections if some seats are no longer valid
+      if (validSeatIds.length !== selectedSeats.length) {
+        setSelectedSeats(validSeatIds);
       }
     }
-
-    loadSeats();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [venue?.venueId]);
-
-  // Save to localStorage when selection changes (debounced)
-  useEffect(() => {
-    if (!venue?.venueId) {
-      return;
-    }
-
-    async function saveSeats() {
-      try {
-        await storageAdapter.save(venue!.venueId, debouncedSeats);
-      } catch (error) {
-        console.warn('Failed to save seat selection to storage:', error);
-      }
-    }
-
-    saveSeats();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [venue?.venueId, debouncedSeats]);
+  }, [venue?.venueId, venue?.sections, selectedSeats, setVenueId, setSelectedSeats]);
 }

@@ -4,7 +4,7 @@ import { VenueHeader } from './ui';
 import { VenueSeating } from './VenueSeating';
 import { SelectedSeatsFloatingButton } from './SelectedSeatsFloatingButton';
 import { SelectedSeatsModal } from './SelectedSeatsModal';
-import { useSeatSelectionStore, useSeatSelectionPersistence } from '../lib/stores/seatSelectionStore';
+import { useSeatSelectionStore, useSeatSelectionSync } from '../lib/stores/seatSelectionStore';
 
 interface VenueContentProps {
   venue: Venue;
@@ -19,8 +19,8 @@ export function VenueContent({ venue }: VenueContentProps) {
     clearSelection,
   } = useSeatSelectionStore();
 
-  // Handle persistence automatically
-  useSeatSelectionPersistence(venue);
+  // Handle venue sync and validation automatically
+  useSeatSelectionSync(venue);
 
   function handleSeatClick(seatId: string, sectionId: string, rowIndex: number, col: number) {
     console.log('Seat clicked:', { seatId, sectionId, rowIndex, col });

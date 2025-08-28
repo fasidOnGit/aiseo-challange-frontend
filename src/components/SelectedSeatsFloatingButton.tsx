@@ -13,7 +13,7 @@ import {
 } from '@mui/icons-material';
 
 interface SelectedSeatsFloatingButtonProps {
-  selectedSeats: Set<string>;
+  selectedSeats: string[];
   venue: Venue | null;
   onClick: () => void;
 }
@@ -31,7 +31,7 @@ export function SelectedSeatsFloatingButton({
     return null;
   }
 
-  const seatCount = selectedSeats.size;
+  const seatCount = selectedSeats.length;
 
   return (
     <Zoom in={true} timeout={300}>

@@ -92,8 +92,8 @@ export function calculateSectionDimensions(section: Venue['sections'][0]) {
 /**
  * Get seat details with section and row information
  */
-export function getSelectedSeatDetails(selectedSeats: Set<string>, venue: Venue): SeatWithDetails[] {
-  return Array.from(selectedSeats).map(seatId => {
+export function getSelectedSeatDetails(selectedSeats: string[], venue: Venue): SeatWithDetails[] {
+  return selectedSeats.map(seatId => {
     for (const section of venue.sections) {
       for (const row of section.rows) {
         const seat = row.seats.find(s => s.id === seatId);
@@ -113,7 +113,7 @@ export function getSelectedSeatDetails(selectedSeats: Set<string>, venue: Venue)
 /**
  * Calculate total price for selected seats
  */
-export function calculateTotalPrice(selectedSeats: Set<string>, venue: Venue): number {
+export function calculateTotalPrice(selectedSeats: string[], venue: Venue): number {
   const seatDetails = getSelectedSeatDetails(selectedSeats, venue);
   
   return seatDetails.reduce((total, seat) => {

@@ -20,7 +20,7 @@ import {
 import { Venue } from '../lib/types';
 
 interface SelectionBottomSheetProps {
-  selectedSeats: Set<string>;
+  selectedSeats: string[];
   venue: Venue | null;
   onClearSelection: () => void;
 }
@@ -33,7 +33,7 @@ export function SelectionBottomSheet({ selectedSeats, venue, onClearSelection }:
   if (!venue) return null;
 
   // Get selected seat details
-  const selectedSeatDetails = Array.from(selectedSeats).map(seatId => {
+  const selectedSeatDetails = selectedSeats.map(seatId => {
     for (const section of venue.sections) {
       for (const row of section.rows) {
         const seat = row.seats.find(s => s.id === seatId);
@@ -83,7 +83,7 @@ export function SelectionBottomSheet({ selectedSeats, venue, onClearSelection }:
           display: 'flex',
           alignItems: 'center'
         }}>
-          {selectedSeats.size === 0 ? (
+          {selectedSeats.length === 0 ? (
             // Empty state - unified header and content
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', gap: 0.5 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -127,9 +127,9 @@ export function SelectionBottomSheet({ selectedSeats, venue, onClearSelection }:
                     color="text.primary"
                     sx={{ fontSize: { xs: '0.875rem', sm: '1.25rem' } }}
                   >
-                    Selected Seats ({selectedSeats.size}/8)
+                    Selected Seats ({selectedSeats.length}/8)
                   </Typography>
-                  {selectedSeats.size >= 8 && (
+                  {selectedSeats.length >= 8 && (
                     <Typography
                       variant="body2"
                       color="warning.main"
@@ -170,7 +170,7 @@ export function SelectionBottomSheet({ selectedSeats, venue, onClearSelection }:
           flexDirection: 'column',
           justifyContent: 'flex-start'
         }}>
-          {selectedSeats.size === 0 ? (
+          {selectedSeats.length === 0 ? (
             // Empty state - just show the limit info
             <Box sx={{ textAlign: 'center', pt: 1 }}>
               <Typography
@@ -286,7 +286,7 @@ export function SelectionBottomSheet({ selectedSeats, venue, onClearSelection }:
           display: 'flex',
           alignItems: 'center'
         }}>
-          {selectedSeats.size === 0 ? (
+          {selectedSeats.length === 0 ? (
             // Empty state footer
             <Box sx={{ width: '100%', textAlign: 'center' }}>
               <Typography
@@ -321,7 +321,7 @@ export function SelectionBottomSheet({ selectedSeats, venue, onClearSelection }:
                   color="text.secondary"
                   sx={{ fontSize: { xs: '0.7rem', sm: '0.875rem' } }}
                 >
-                  {selectedSeats.size} seat{selectedSeats.size !== 1 ? 's' : ''} selected
+                  {selectedSeats.length} seat{selectedSeats.length !== 1 ? 's' : ''} selected
                 </Typography>
               </Box>
               <Button

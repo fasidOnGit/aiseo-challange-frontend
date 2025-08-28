@@ -30,7 +30,7 @@ import { forwardRef, ReactElement, Ref } from 'react';
 
 interface SelectedSeatsModalProps {
   open: boolean;
-  selectedSeats: Set<string>;
+  selectedSeats: string[];
   venue: Venue | null;
   onClose: () => void;
   onClearSelection: () => void;
@@ -60,7 +60,7 @@ export function SelectedSeatsModal({
     return null;
   }
 
-  const selectedSeatDetails = Array.from(selectedSeats).map(seatId => {
+  const selectedSeatDetails = selectedSeats.map(seatId => {
     for (const section of venue.sections) {
       for (const row of section.rows) {
         const seat = row.seats.find(s => s.id === seatId);
@@ -123,7 +123,7 @@ export function SelectedSeatsModal({
               Selected Seats
             </Typography>
             <Chip
-              label={`${selectedSeats.size}/8`}
+              label={`${selectedSeats.length}/8`}
               size="small"
               sx={{
                 background: 'rgba(255, 255, 255, 0.2)',
@@ -137,7 +137,7 @@ export function SelectedSeatsModal({
 
       {/* Content */}
       <DialogContent sx={{ p: 0, flex: 1 }}>
-        {selectedSeats.size === 0 ? (
+        {selectedSeats.length === 0 ? (
           // Empty state
           <Box sx={{
             display: 'flex',
@@ -278,7 +278,7 @@ export function SelectedSeatsModal({
       </DialogContent>
 
       {/* Footer Actions */}
-      {selectedSeats.size > 0 && (
+      {selectedSeats.length > 0 && (
         <DialogActions sx={{
           p: 2,
           background: theme.palette.background.paper,
@@ -300,7 +300,7 @@ export function SelectedSeatsModal({
                   Total: ${totalPrice}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {selectedSeats.size} seat{selectedSeats.size !== 1 ? 's' : ''} selected
+                  {selectedSeats.length} seat{selectedSeats.length !== 1 ? 's' : ''} selected
                 </Typography>
               </Box>
             </Box>

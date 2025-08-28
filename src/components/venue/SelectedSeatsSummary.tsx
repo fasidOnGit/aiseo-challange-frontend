@@ -17,7 +17,7 @@ import { calculateTotalPrice } from '../../lib/utils/venue';
 import { VENUE_CONFIG } from '../../lib/constants/venue';
 
 interface SelectedSeatsSummaryProps {
-  selectedSeats: Set<string>;
+  selectedSeats: string[];
   venue: Venue;
   onClearSelection: () => void;
 }
@@ -35,12 +35,12 @@ export function SelectedSeatsSummary({
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   
   // Don't show on mobile or when no seats selected
-  if (isMobile || selectedSeats.size === 0) {
+  if (isMobile || selectedSeats.length === 0) {
     return null;
   }
   
   const totalPrice = calculateTotalPrice(selectedSeats, venue);
-  const isAtLimit = selectedSeats.size >= VENUE_CONFIG.maxSeatsSelection;
+  const isAtLimit = selectedSeats.length >= VENUE_CONFIG.maxSeatsSelection;
 
   return (
     <Paper
@@ -80,7 +80,7 @@ export function SelectedSeatsSummary({
                 color="text.primary"
                 sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}
               >
-                Selected Seats ({selectedSeats.size}/{VENUE_CONFIG.maxSeatsSelection})
+                Selected Seats ({selectedSeats.length}/{VENUE_CONFIG.maxSeatsSelection})
               </Typography>
               {isAtLimit && (
                 <Typography 
@@ -119,7 +119,7 @@ export function SelectedSeatsSummary({
           gap: { xs: 1, sm: 1.5 }, 
           mb: 2 
         }} role="grid" aria-label="Selected seats grid">
-          {Array.from(selectedSeats).slice(0, VENUE_CONFIG.maxSeatsSelection).map((seatId, index) => (
+          {selectedSeats.slice(0, VENUE_CONFIG.maxSeatsSelection).map((seatId, index) => (
             <SelectedSeatsCard
               key={seatId}
               seatId={seatId}
@@ -153,7 +153,7 @@ export function SelectedSeatsSummary({
               color="text.secondary"
               sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}
             >
-              {selectedSeats.size} seat{selectedSeats.size !== 1 ? 's' : ''} selected
+              {selectedSeats.length} seat{selectedSeats.length !== 1 ? 's' : ''} selected
             </Typography>
           </Box>
           <Button
@@ -173,7 +173,7 @@ export function SelectedSeatsSummary({
                 transition: 'all 0.2s ease-in-out'
               }
             }}
-            aria-label={`Continue to checkout with ${selectedSeats.size} selected seats`}
+            aria-label={`Continue to checkout with ${selectedSeats.length} selected seats`}
           >
             Continue to Checkout
           </Button>

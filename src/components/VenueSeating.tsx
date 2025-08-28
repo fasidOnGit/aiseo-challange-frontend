@@ -11,9 +11,6 @@ import {
 interface VenueSeatingProps {
   venue: Venue;
   onSeatClick?: (seatId: string, sectionId: string, rowIndex: number, col: number) => void;
-  // Keeping these for backward compatibility during transition
-  selectedSeats?: Set<string>;
-  onSelectedSeatsChange?: (seats: Set<string>) => void;
 }
 
 /**
