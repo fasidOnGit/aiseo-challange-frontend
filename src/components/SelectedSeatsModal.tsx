@@ -60,7 +60,6 @@ export function SelectedSeatsModal({
     return null;
   }
 
-  // Get selected seat details
   const selectedSeatDetails = Array.from(selectedSeats).map(seatId => {
     for (const section of venue.sections) {
       for (const row of section.rows) {
@@ -93,7 +92,7 @@ export function SelectedSeatsModal({
       fullScreen
       open={open}
       onClose={onClose}
-      TransitionComponent={Transition}
+      slots={{ transition: Transition }}
       sx={{
         '& .MuiDialog-paper': {
           background: theme.palette.background.default
