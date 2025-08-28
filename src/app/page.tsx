@@ -1,6 +1,8 @@
 'use client';
 
 import { VenueSeating } from '../components/VenueSeating';
+import { SelectedSeatsFloatingButton } from '../components/SelectedSeatsFloatingButton';
+import { SelectedSeatsModal } from '../components/SelectedSeatsModal';
 import { useVenue } from '../lib/hooks/useVenue';
 import { useState, useEffect, useCallback } from 'react';
 import {
@@ -8,7 +10,6 @@ import {
   Container,
   Typography,
   CircularProgress,
-  Alert,
   Button,
   Paper,
   useTheme,
@@ -39,9 +40,9 @@ function useDebounce<T>(value: T, delay: number): T {
 export default function Home() {
   const { data: venue, isLoading, error, refetch } = useVenue();
   const [selectedSeats, setSelectedSeats] = useState<Set<string>>(new Set());
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   // Debounce selectedSeats for localStorage updates
   const debouncedSelectedSeats = useDebounce(selectedSeats, 500);
@@ -95,6 +96,18 @@ export default function Home() {
 
   const handleSelectedSeatsChange = useCallback((seats: Set<string>) => {
     setSelectedSeats(seats);
+  }, []);
+
+  const handleOpenModal = useCallback(() => {
+    setIsModalOpen(true);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
+  const handleClearSelection = useCallback(() => {
+    setSelectedSeats(new Set());
   }, []);
 
   if (isLoading) {
@@ -339,8 +352,9 @@ export default function Home() {
       <Container 
         maxWidth="xl" 
         sx={{ 
-          py: { xs: 2, sm: 3 },
-          px: { xs: 2, sm: 3 }
+          py: { xs: 1, sm: 3 }, // Reduce vertical padding on mobile
+          px: { xs: 1, sm: 3 }, // Reduce horizontal padding on mobile
+          height: { xs: 'calc(100vh - 120px)', sm: 'auto' } // Use more screen height on mobile
         }} 
         role="main" 
         aria-label="Venue seating chart and selection" 
@@ -353,6 +367,21 @@ export default function Home() {
           onSelectedSeatsChange={handleSelectedSeatsChange}
         />
       </Container>
+
+      {/* Mobile Components */}
+      <SelectedSeatsFloatingButton
+        selectedSeats={selectedSeats}
+        venue={venue}
+        onClick={handleOpenModal}
+      />
+
+      <SelectedSeatsModal
+        open={isModalOpen}
+        selectedSeats={selectedSeats}
+        venue={venue}
+        onClose={handleCloseModal}
+        onClearSelection={handleClearSelection}
+      />
     </Box>
   );
 }

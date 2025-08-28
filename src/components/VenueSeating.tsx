@@ -123,16 +123,17 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
 
   return (
     <Box sx={{ 
-      height: '100%', 
+      height: { xs: '100%', sm: '100%' }, 
       display: 'flex', 
       flexDirection: 'column',
       width: '100%',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      minHeight: { xs: 'calc(100vh - 140px)', sm: 'auto' } // Use most of screen height on mobile
     }} role="region" aria-label="Venue seating selection">
 
 
-      {/* Sticky Selection Header */}
-      {selectedSeats.size > 0 && (
+      {/* Sticky Selection Header - Desktop Only */}
+      {selectedSeats.size > 0 && !isMobile && (
         <Paper
           elevation={3}
           sx={{
@@ -373,16 +374,18 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
           borderRadius: 2,
           overflow: 'hidden',
           background: theme.palette.background.default,
-          width: '100%'
+          width: '100%',
+          minHeight: { xs: '70vh', sm: 'auto' } // Ensure minimum height on mobile
         }}
         role="region"
         aria-label="Interactive seating chart"
       >
         <Box sx={{ 
           height: '100%', 
-          p: { xs: 1, sm: 2 },
+          p: { xs: 0.5, sm: 2 }, // Reduce padding on mobile for more space
           width: '100%',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          minHeight: { xs: '70vh', sm: 'auto' } // Match parent min height
         }}>
           <svg
             viewBox={`${minX - padding} ${minY - padding} ${viewBoxWidth} ${viewBoxHeight}`}
@@ -393,7 +396,8 @@ export function VenueSeating({ venue, onSeatClick, selectedSeats, onSelectedSeat
               cursor: 'pointer',
               borderRadius: theme.shape.borderRadius,
               maxWidth: '100%',
-              overflow: 'visible'
+              overflow: 'visible',
+              minHeight: isMobile ? '60vh' : 'auto' // Ensure good minimum height on mobile
             }}
             role="img"
             aria-label="Interactive venue seating chart"
