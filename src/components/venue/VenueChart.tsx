@@ -20,9 +20,11 @@ interface VenueChartProps {
 }
 
 /**
- * Pure component for rendering the SVG venue seating chart
+ * Component for rendering the SVG venue seating chart
+ * Remove React.memo - selectedSeats and isAtSelectionLimit change frequently
+ * making memo comparison overhead > benefit
  */
-export const VenueChart = React.memo(function VenueChart({ 
+export function VenueChart({ 
   venue, 
   selectedSeats, 
   onSeatClick, 
@@ -121,4 +123,4 @@ export const VenueChart = React.memo(function VenueChart({
       </Box>
     </Paper>
   );
-});
+}

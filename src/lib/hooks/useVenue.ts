@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Venue } from '../types';
+import { useState, useEffect } from 'react';
 
 async function fetchVenue(): Promise<Venue> {
   const response = await fetch('/venue.json');
@@ -10,9 +11,16 @@ async function fetchVenue(): Promise<Venue> {
 }
 
 export function useVenue() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return useQuery({
     queryKey: ['venue'],
     queryFn: fetchVenue,
     staleTime: 5 * 60 * 1000, // 5 minutes
+    enabled: isClient, // Only run after hydration
   });
 }

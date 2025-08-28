@@ -24,8 +24,9 @@ interface SelectedSeatsSummaryProps {
 
 /**
  * Component for displaying selected seats summary (desktop only)
+ * Remove React.memo - selectedSeats changes frequently, negating memo benefits
  */
-export const SelectedSeatsSummary = React.memo(function SelectedSeatsSummary({ 
+export function SelectedSeatsSummary({ 
   selectedSeats, 
   venue, 
   onClearSelection 
@@ -180,4 +181,4 @@ export const SelectedSeatsSummary = React.memo(function SelectedSeatsSummary({
       </Box>
     </Paper>
   );
-});
+}

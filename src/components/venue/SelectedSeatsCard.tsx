@@ -18,7 +18,9 @@ interface SelectedSeatsCardProps {
 }
 
 /**
- * Pure component for rendering individual selected seat cards
+ * Component for rendering individual selected seat cards
+ * Keep React.memo - stable props (seatId, venue rarely change)
+ * and prevents expensive findSeatById re-execution
  */
 export const SelectedSeatsCard = React.memo(function SelectedSeatsCard({ 
   seatId, 

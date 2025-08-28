@@ -19,6 +19,7 @@ interface UseSeatSelectionReturn {
 
 /**
  * Custom hook for managing seat selection logic
+ * Only uses useCallback where the performance benefit outweighs the overhead
  */
 export function useSeatSelection({
   venue,
@@ -29,14 +30,18 @@ export function useSeatSelection({
   
   const isAtSelectionLimit = selectedSeats.size >= VENUE_CONFIG.maxSeatsSelection;
   
-  const canSelectSeat = useCallback((seat: Seat): boolean => {
+  // Simple pure function - no useCallback needed, overhead > benefit
+  function canSelectSeat(seat: Seat): boolean {
     return seat.status === 'available';
-  }, []);
+  }
   
-  const isSeatSelected = useCallback((seatId: string): boolean => {
+  // Simple one-liner - no useCallback needed, overhead > benefit  
+  function isSeatSelected(seatId: string): boolean {
     return selectedSeats.has(seatId);
-  }, [selectedSeats]);
+  }
   
+  // Complex function with dependencies - useCallback is beneficial here
+  // This prevents child components from re-rendering unnecessarily
   const handleSeatClick = useCallback((seatId: string, sectionId: string, rowIndex: number, col: number) => {
     // Call external handler if provided
     if (onSeatClick) {
@@ -49,7 +54,7 @@ export function useSeatSelection({
       ?.rows.find(r => r.index === rowIndex)
       ?.seats.find(s => s.col === col);
     
-    if (!seat || !canSelectSeat(seat)) {
+    if (!seat || seat.status !== 'available') {
       return;
     }
     
@@ -67,11 +72,12 @@ export function useSeatSelection({
     }
     // If at limit and trying to select new seat, do nothing
     
-  }, [venue, selectedSeats, onSelectedSeatsChange, onSeatClick, canSelectSeat]);
+  }, [venue, selectedSeats, onSelectedSeatsChange, onSeatClick]);
   
-  const clearAllSeats = useCallback(() => {
+  // Simple function - no useCallback needed
+  function clearAllSeats(): void {
     onSelectedSeatsChange(new Set());
-  }, [onSelectedSeatsChange]);
+  }
   
   return {
     handleSeatClick,

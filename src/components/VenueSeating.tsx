@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, useMediaQuery, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 import { Venue } from '../lib/types';
-import { useSeatSelection } from '../lib/hooks/useSeatSelection';
+import { useSeatSelectionStore } from '../lib/stores/seatSelectionStore';
 import { 
   SelectedSeatsSummary, 
   VenueChart, 
@@ -11,40 +11,50 @@ import {
 interface VenueSeatingProps {
   venue: Venue;
   onSeatClick?: (seatId: string, sectionId: string, rowIndex: number, col: number) => void;
-  selectedSeats: Set<string>;
-  onSelectedSeatsChange: (seats: Set<string>) => void;
+  // Keeping these for backward compatibility during transition
+  selectedSeats?: Set<string>;
+  onSelectedSeatsChange?: (seats: Set<string>) => void;
 }
 
 /**
  * Main venue seating component that orchestrates the seating chart interface
  * 
  * This component follows the Single Responsibility Principle by delegating
- * specific concerns to specialized child components and hooks:
- * - Seat selection logic: useSeatSelection hook
+ * specific concerns to specialized child components and stores:
+ * - Seat selection state: Zustand store
  * - Selected seats display: SelectedSeatsSummary component
  * - Seating chart rendering: VenueChart component
  * - Legend display: VenueLegend component
  */
 export function VenueSeating({ 
   venue, 
-  onSeatClick, 
-  selectedSeats, 
-  onSelectedSeatsChange 
+  onSeatClick
 }: VenueSeatingProps) {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  // Use custom hook for seat selection logic
+  // Get state and actions from Zustand store
   const { 
-    handleSeatClick, 
-    clearAllSeats, 
-    isAtSelectionLimit 
-  } = useSeatSelection({
-    venue,
     selectedSeats,
-    onSelectedSeatsChange,
-    onSeatClick
-  });
+    toggleSeat,
+    clearSelection,
+    isAtLimit
+  } = useSeatSelectionStore();
+
+  function handleSeatClick(seatId: string, sectionId: string, rowIndex: number, col: number) {
+    // Call external handler if provided
+    if (onSeatClick) {
+      onSeatClick(seatId, sectionId, rowIndex, col);
+    }
+    
+    // Find the seat to pass to toggleSeat
+    const seat = venue.sections
+      .find(s => s.id === sectionId)
+      ?.rows.find(r => r.index === rowIndex)
+      ?.seats.find(s => s.col === col);
+    
+    if (seat) {
+      toggleSeat(seatId, seat);
+    }
+  }
 
   return (
     <Box 
@@ -63,7 +73,7 @@ export function VenueSeating({
       <SelectedSeatsSummary
         selectedSeats={selectedSeats}
         venue={venue}
-        onClearSelection={clearAllSeats}
+        onClearSelection={clearSelection}
       />
 
       {/* Interactive Seating Chart */}
@@ -71,7 +81,7 @@ export function VenueSeating({
         venue={venue}
         selectedSeats={selectedSeats}
         onSeatClick={handleSeatClick}
-        isAtSelectionLimit={isAtSelectionLimit}
+        isAtSelectionLimit={isAtLimit()}
       />
 
       {/* Legend */}

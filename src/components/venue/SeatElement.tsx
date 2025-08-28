@@ -14,9 +14,11 @@ interface SeatElementProps {
 }
 
 /**
- * Pure component for rendering individual seat elements in SVG
+ * Component for rendering individual seat elements in SVG
+ * No React.memo - props change frequently (isSelected, isAtSelectionLimit)
+ * and memo overhead > benefit for 500+ seats
  */
-export const SeatElement = React.memo(function SeatElement({ 
+export function SeatElement({ 
   seat, 
   sectionId, 
   rowIndex, 
@@ -72,4 +74,4 @@ export const SeatElement = React.memo(function SeatElement({
       focusable={isClickable && !isDisabled ? 'true' : undefined}
     />
   );
-});
+}
