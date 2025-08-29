@@ -6,6 +6,7 @@ A high-performance, accessible venue seating visualization system built with Nex
 
 - **Interactive SVG-based seating chart** with 100+ seats across multiple sections
 - **Real-time seat selection** with persistent state management
+- **Server-side rendering** with immediate venue visibility and SEO optimization
 - **Responsive design** with mobile-first approach and adaptive UI
 - **Type-safe architecture** with full TypeScript coverage
 - **Accessible interface** with ARIA compliance and keyboard navigation

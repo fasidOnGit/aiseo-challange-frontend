@@ -1,26 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import { Venue } from '../types';
-import { useState, useEffect } from 'react';
+import { fetchVenueClient } from '../server/venueData';
 
-async function fetchVenue(): Promise<Venue> {
-  const response = await fetch('/venue.json');
-  if (!response.ok) {
-    throw new Error('Failed to fetch venue data');
-  }
-  return response.json();
-}
-
-export function useVenue() {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
+/**
+ * Client-side hook for venue data updates and mutations
+ * When used with SSR, the initial data should be provided to avoid refetching
+ */
+export function useVenue(initialData?: Venue) {
   return useQuery({
     queryKey: ['venue'],
-    queryFn: fetchVenue,
+    queryFn: fetchVenueClient,
     staleTime: 5 * 60 * 1000, // 5 minutes
-    enabled: isClient, // Only run after hydration
+    initialData, // Use server-provided data as initial data
+    refetchOnMount: false, // Don't refetch if we have initial data
+    refetchOnWindowFocus: false, // Don't refetch on window focus for static venue data
   });
 }
+
+

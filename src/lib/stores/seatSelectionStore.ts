@@ -17,6 +17,7 @@ interface SeatSelectionState {
   setVenueId: (venueId: string) => void;
   openModal: () => void;
   closeModal: () => void;
+  initializeFromServerData: (venue: Venue) => void;
   // Computed
   isAtLimit: () => boolean;
   isSeatSelected: (seatId: string) => boolean;
@@ -76,6 +77,11 @@ export const useSeatSelectionStore = create<SeatSelectionState>()(
 
       closeModal: () => {
         set({ isModalOpen: false });
+      },
+
+      initializeFromServerData: (venue) => {
+        const { setVenueId } = get();
+        setVenueId(venue.venueId);
       },
 
       // Computed getters

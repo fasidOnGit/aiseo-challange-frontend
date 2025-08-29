@@ -1,44 +1,52 @@
-'use client';
-
-import { useVenue } from '../lib/hooks/useVenue';
-import { VenueContent } from '../components/VenueContent';
-import { ErrorBoundary, SuspenseWrapper, LoadingState, ErrorState } from '../components/ui';
+import { Suspense } from 'react';
+import { getVenueData } from '../lib/server/venueData';
+import { VenueClientWrapper } from '../components/VenueClientWrapper';
 
 /**
- * Home page component - now focused only on data fetching and error boundaries
- * All other responsibilities have been moved to appropriate components and stores
+ * Server-rendered home page component
+ * Fetches venue data at build time/request time for better performance and SEO
  */
-export default function Home() {
-  const { data: venue, isLoading, error, refetch } = useVenue();
+export default async function Home() {
+  try {
+    const venue = await getVenueData();
 
-  // Show loading during initial hydration or when actually loading
-  if (isLoading || !venue) {
     return (
-      <LoadingState 
-        message="Loading Venue"
-        description="Preparing your seating experience..."
-      />
+      <Suspense fallback={<ServerFallback />}>
+        <VenueClientWrapper venue={venue} />
+      </Suspense>
     );
+  } catch (error) {
+    console.error('Failed to load venue data on server:', error);
+    
+    // Return a fallback that will attempt client-side fetching
+    return <ServerFallback />;
   }
+}
 
-  if (error) {
-    return (
-      <ErrorState 
-        error={error}
-        onRetry={refetch}
-        title="Failed to Load Venue"
-      />
-    );
-  }
-
+/**
+ * Server-safe fallback component
+ */
+function ServerFallback() {
   return (
-    <ErrorBoundary>
-      <SuspenseWrapper
-        loadingMessage="Loading Venue Components"
-        loadingDescription="Setting up your seating experience..."
-      >
-        <VenueContent venue={venue} />
-      </SuspenseWrapper>
-    </ErrorBoundary>
+    <div style={{ 
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      minHeight: '100vh',
+      flexDirection: 'column',
+      gap: '16px',
+      padding: '20px'
+    }}>
+      <h1>Loading Venue...</h1>
+      <p>Preparing your seating experience...</p>
+      <div style={{ 
+        width: '40px', 
+        height: '40px', 
+        border: '4px solid #f3f3f3',
+        borderTop: '4px solid #3498db',
+        borderRadius: '50%',
+        animation: 'spin 2s linear infinite'
+      }} />
+    </div>
   );
 }

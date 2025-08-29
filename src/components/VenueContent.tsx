@@ -1,3 +1,5 @@
+'use client';
+
 import { Box, Container } from '@mui/material';
 import { Venue } from '../lib/types';
 import { VenueHeader } from './ui';
