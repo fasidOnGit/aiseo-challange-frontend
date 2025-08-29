@@ -33,11 +33,17 @@ export function SelectedSeatsFloatingButton({
 
   const seatCount = selectedSeats.length;
 
+  // Don't render if no seats are selected
+  if (seatCount === 0) {
+    return null;
+  }
+
   return (
     <Zoom in={true} timeout={300}>
       <Fab
         color="primary"
         onClick={onClick}
+        role="button"
         sx={{
           position: 'fixed',
           bottom: { xs: 20, sm: 24 },
@@ -54,7 +60,7 @@ export function SelectedSeatsFloatingButton({
             transition: 'all 0.1s ease-in-out'
           }
         }}
-        aria-label={seatCount > 0 ? `${seatCount} seats selected, tap to view details` : 'No seats selected'}
+        aria-label={`${seatCount} seats selected, tap to view details`}
       >
         <Badge 
           badgeContent={seatCount} 

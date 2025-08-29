@@ -54,7 +54,9 @@ export function SeatElement({
     }
   };
 
-  const ariaLabel = `Seat ${seat.col} in row ${rowIndex} of section ${sectionId}${isDisabled ? ' - Maximum seats reached' : ''}`;
+  const ariaLabel = `Seat ${seat.col} in row ${rowIndex} of section ${sectionId}${
+    !isClickable ? ` - ${seat.status}` : isDisabled ? ' - Maximum seats reached' : ''
+  }`;
 
   return (
     <use
@@ -71,6 +73,7 @@ export function SeatElement({
       aria-label={ariaLabel}
       aria-pressed={isSelected}
       aria-disabled={!isClickable || isDisabled}
+      data-seat-status={seat.status}
       focusable={isClickable && !isDisabled ? 'true' : undefined}
     />
   );

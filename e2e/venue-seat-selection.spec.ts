@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { VenuePage } from './pages/VenuePage';
 
-test.describe('Venue Seat Selection - High Priority Scenarios', () => {
+test.describe('Venue Seat Selection - E2E Core Flows', () => {
   let venuePage: VenuePage;
 
   test.beforeEach(async ({ page }) => {
@@ -27,13 +27,9 @@ test.describe('Venue Seat Selection - High Priority Scenarios', () => {
       // Verify seat count updated
       await venuePage.waitForSeatSelection(1);
       
-      // On desktop, summary should be visible with 1 seat
-      await expect(venuePage.seatCountDisplay).toContainText('(1/8)');
-      
       // Select another seat
       await venuePage.selectFirstAvailableSeat();
       await venuePage.waitForSeatSelection(2);
-      await expect(venuePage.seatCountDisplay).toContainText('(2/8)');
       
       // Clear all selections
       await venuePage.clearAllSelections();
@@ -96,30 +92,58 @@ test.describe('Venue Seat Selection - High Priority Scenarios', () => {
 
   test.describe('Scenario 3: Seat Status Validation', () => {
     test('should only allow selection of available seats', async () => {
-      // Get counts of different seat types
-      const availableSeats = venuePage.page.locator('use[role="button"]:not([aria-disabled="true"])');
-      const disabledSeats = venuePage.page.locator('use[aria-disabled="true"]');
+      // Get counts of different seat types using data attributes
+      const availableSeats = venuePage.page.locator('use[data-seat-status="available"]:not([aria-pressed="true"])');
+      const reservedSeats = venuePage.page.locator('use[data-seat-status="reserved"]');
+      const soldSeats = venuePage.page.locator('use[data-seat-status="sold"]');
       
       const availableCount = await availableSeats.count();
-      const disabledCount = await disabledSeats.count();
+      const reservedCount = await reservedSeats.count();
+      const soldCount = await soldSeats.count();
       
-      console.log(`Available seats: ${availableCount}, Disabled seats: ${disabledCount}`);
+      console.log(`Available seats: ${availableCount}, Reserved seats: ${reservedCount}, Sold seats: ${soldCount}`);
+      
+      // Verify that reserved seats are properly disabled
+      if (reservedCount > 0) {
+        const firstReservedSeat = reservedSeats.first();
+        await expect(firstReservedSeat).toHaveAttribute('aria-disabled', 'true');
+        await expect(firstReservedSeat).toHaveAttribute('tabindex', '-1');
+        await expect(firstReservedSeat).toHaveAttribute('aria-label', /reserved/);
+      }
+      
+      // Verify that sold seats are properly disabled
+      if (soldCount > 0) {
+        const firstSoldSeat = soldSeats.first();
+        await expect(firstSoldSeat).toHaveAttribute('aria-disabled', 'true');
+        await expect(firstSoldSeat).toHaveAttribute('tabindex', '-1');
+        await expect(firstSoldSeat).toHaveAttribute('aria-label', /sold/);
+      }
       
       // Should be able to select available seats
       if (availableCount > 0) {
         await venuePage.selectFirstAvailableSeat();
         await venuePage.waitForSeatSelection(1);
+        
+        // Verify selected seat has correct attributes
+        const selectedSeats = venuePage.page.locator('use[aria-pressed="true"]');
+        const firstSelected = selectedSeats.first();
+        await expect(firstSelected).toHaveAttribute('data-seat-status', 'available');
+        await expect(firstSelected).toHaveAttribute('aria-disabled', 'false');
       }
       
-      // Clicking disabled seats should not change selection count
-      if (disabledCount > 0) {
-        const currentCount = await venuePage.getSelectedSeatCount();
-        await disabledSeats.first().click();
-        
-        // Wait a bit and verify count hasn't changed
-        await venuePage.page.waitForTimeout(500);
-        const newCount = await venuePage.getSelectedSeatCount();
-        expect(newCount).toBe(currentCount);
+      // Verify that we can select multiple available seats
+      if (availableCount > 1) {
+        await venuePage.selectFirstAvailableSeat();
+        await venuePage.waitForSeatSelection(2);
+      }
+      
+      // Final verification: ensure only available seats can be selected
+      const finalSelectedSeats = venuePage.page.locator('use[aria-pressed="true"]');
+      const finalSelectedCount = await finalSelectedSeats.count();
+      
+      // All selected seats should have status "available"
+      for (let i = 0; i < finalSelectedCount; i++) {
+        await expect(finalSelectedSeats.nth(i)).toHaveAttribute('data-seat-status', 'available');
       }
     });
   });

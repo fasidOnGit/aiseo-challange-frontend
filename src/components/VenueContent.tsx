@@ -22,10 +22,6 @@ export function VenueContent({ venue }: VenueContentProps) {
   // Handle venue sync and validation automatically
   useSeatSelectionSync(venue);
 
-  function handleSeatClick(seatId: string, sectionId: string, rowIndex: number, col: number) {
-    console.log('Seat clicked:', { seatId, sectionId, rowIndex, col });
-  }
-
   return (
     <Box sx={{ minHeight: '100vh' }}>
       {/* Skip link for accessibility */}
@@ -69,8 +65,7 @@ export function VenueContent({ venue }: VenueContentProps) {
         id="main-content"
       >
         <VenueSeating 
-          venue={venue} 
-          onSeatClick={handleSeatClick}
+          venue={venue}
         />
       </Container>
 

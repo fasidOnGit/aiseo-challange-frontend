@@ -19,7 +19,7 @@ export class VenuePage {
     this.venueHeader = page.locator('[role="banner"]').first();
     this.seatingChart = page.locator('[role="img"][aria-label*="Interactive venue seating chart"]');
     this.selectedSeatsSummary = page.locator('[role="region"][aria-label="Selected seats summary"]');
-    this.selectedSeatsFloatingButton = page.locator('[role="button"][aria-label*="seats selected"]');
+    this.selectedSeatsFloatingButton = page.locator('[role="button"][aria-label*="seats selected, tap to view details"]');
     this.selectedSeatsModal = page.locator('[role="dialog"]');
     
     // Action buttons
@@ -45,25 +45,45 @@ export class VenuePage {
   }
 
   async selectFirstAvailableSeat() {
-    // Look for available seats (not aria-disabled and aria-pressed false)
+    // Look for available seat elements (not disabled and not already selected)
     const availableSeats = this.page.locator('use[role="button"]:not([aria-disabled="true"])[aria-pressed="false"]');
-    await expect(availableSeats.first()).toBeVisible();
-    await availableSeats.first().click();
+    const firstSeat = availableSeats.first();
+    
+    // Get the aria-label to identify this specific seat later
+    const seatLabel = await firstSeat.getAttribute('aria-label');
+    
+    await expect(firstSeat).toBeVisible();
+    await firstSeat.click();
+    
+    // Wait for this specific seat to be visually selected
+    const selectedSeat = this.page.locator(`use[aria-label="${seatLabel}"]`);
+    await expect(selectedSeat).toHaveAttribute('aria-pressed', 'true');
   }
 
   async selectMultipleSeats(count: number) {
-    const availableSeats = this.page.locator('use[role="button"]:not([aria-disabled="true"])[aria-pressed="false"]');
-    
     for (let i = 0; i < count; i++) {
-      const seat = availableSeats.nth(i);
+      // Re-query available seats each time since the list changes after each selection
+      const availableSeats = this.page.locator('use[role="button"]:not([aria-disabled="true"])[aria-pressed="false"]');
+      const seat = availableSeats.first();
+      
+      // Get the aria-label to identify this specific seat later
+      const seatLabel = await seat.getAttribute('aria-label');
+      
       await expect(seat).toBeVisible();
       await seat.click();
-      // Small delay to allow state updates
-      await this.page.waitForTimeout(200);
+      
+      // Wait for this specific seat to be visually selected
+      const selectedSeat = this.page.locator(`use[aria-label="${seatLabel}"]`);
+      await expect(selectedSeat).toHaveAttribute('aria-pressed', 'true');
     }
   }
 
   async getSelectedSeatCount(): Promise<number> {
+    // Check if summary is visible first - if not, return 0
+    if (!(await this.selectedSeatsSummary.isVisible())) {
+      return 0;
+    }
+    
     // Extract number from text like "Selected Seats (3/8)"
     const countText = await this.seatCountDisplay.textContent();
     const match = countText?.match(/\((\d+)\/\d+\)/);
@@ -73,7 +93,7 @@ export class VenuePage {
   async getTotalPrice(): Promise<number> {
     // Extract number from text like "Total: $450"
     const priceText = await this.totalPriceText.textContent();
-    const match = priceText?.match(/\\$(\d+)/);
+    const match = priceText?.match(/\$(\d+)/);
     return match ? parseInt(match[1]) : 0;
   }
 
@@ -84,11 +104,51 @@ export class VenuePage {
   }
 
   async waitForSeatSelection(expectedCount: number) {
-    await expect(this.seatCountDisplay).toContainText(`(${expectedCount}/8)`);
+    if (expectedCount === 0) {
+      // When no seats selected, the summary component should not be visible on any device
+      await expect(this.selectedSeatsSummary).not.toBeVisible();
+    } else {
+      // First, wait for seats to be selected and UI to update
+      await this.page.waitForTimeout(500);
+      
+      // Check if we're on mobile by checking viewport width 
+      const viewportSize = this.page.viewportSize();
+      const isMobile = viewportSize && viewportSize.width < 600;
+      
+      if (isMobile) {
+        // On mobile, look for the floating button using aria-label
+        const floatingButton = this.page.locator(`button[aria-label="${expectedCount} seats selected, tap to view details"]`);
+        await expect(floatingButton).toBeVisible();
+      } else {
+        // On desktop, expect summary to be visible with correct count
+        await expect(this.selectedSeatsSummary).toBeVisible();
+        await expect(this.seatCountDisplay).toContainText(`(${expectedCount}/8)`);
+      }
+    }
   }
 
   async clearAllSelections() {
-    await this.clearAllButton.click();
+    // Check if we're on mobile by checking viewport width 
+    const viewportSize = this.page.viewportSize();
+    const isMobile = viewportSize && viewportSize.width < 600;
+    
+    if (isMobile) {
+      // On mobile, need to open the modal first
+      const floatingButton = this.page.locator('button[aria-label*="seats selected, tap to view details"]');
+      await floatingButton.click();
+      
+      // Wait for modal to open and find Clear All button inside
+      await expect(this.selectedSeatsModal).toBeVisible();
+      const modalClearButton = this.selectedSeatsModal.locator('button', { hasText: 'Clear All' });
+      await modalClearButton.click();
+      
+      // Wait for modal to close
+      await expect(this.selectedSeatsModal).not.toBeVisible();
+    } else {
+      // On desktop, clear button is directly accessible
+      await this.clearAllButton.click();
+    }
+    
     await this.waitForSeatSelection(0);
   }
 

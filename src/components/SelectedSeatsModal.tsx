@@ -189,7 +189,7 @@ export function SelectedSeatsModal({
               mb: 2 
             }}>
               <Typography variant="h6" fontWeight="bold">
-                Selected Seats
+                Your Selection
               </Typography>
               <Button
                 variant="outlined"
